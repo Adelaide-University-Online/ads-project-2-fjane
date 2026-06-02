@@ -74,4 +74,30 @@ class EdgeTest {
     void testDiffWeightNotEqual() {
         assertNotEquals(edgeDiffWeight, edge1, "Edges with different weights but the same source and destination vertices should be considered equal.");
     }
+
+    // Hash code tests
+
+    @Test
+    void testSameAttributesHashCode() {
+        assertEquals(edge1.hashCode(), edge1Copy.hashCode(),
+                "Edges with the same source and destination vertices and weight should produce the same hash code.");
+    }
+
+    @Test
+    void testDiffSourceHashCode() {
+        assertNotEquals(edgeDiffSource.hashCode(), edge1.hashCode(),
+                "Edges with different source vertices but the same destination vertex and weight should produce different hash codes.");
+    }
+
+    @Test
+    void testDiffDestinationHashCode() {
+        assertNotEquals(edgeDiffDest.hashCode(), edge1.hashCode(),
+                "Edges with different destination vertices but the same source vertex and weight should produce different hash codes.");
+    }
+
+    @Test
+    void testDiffWeightHashCode() {
+        assertNotEquals(edgeDiffWeight.hashCode(), edge1.hashCode(),
+                "Edges with different weights but the same source and destination vertices should produce different hash codes.");
+    }
 }
