@@ -28,4 +28,22 @@ public class Edge {
         this.destination = destination;
         this.weight = 1.0;
     }
+
+    // Accessors
+
+    /** Return the source vertex of an edge. */
+    public String getSource() {
+        return source;
+    }
+
+    /** Return the destination vertex of an edge. */
+    public String getDestination() {
+        return destination;
+    }
+
+    /** Return the weight of an edge. */
+    public double getWeight() {
+        return weight;
+    }
+
 }
