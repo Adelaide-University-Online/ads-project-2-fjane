@@ -52,4 +52,31 @@ public class Edge {
     public void setWeight(double weight) {
         this.weight = weight;
     }
+
+    // Other methods
+
+    /**
+     * Compares an object with this.instance.
+     * @param obj   The reference object to be compared
+     * @return true if the comparison Edge object has the same source and destination vertices
+     */
+    @Override
+    public boolean equals(Object obj) {
+        // Check self comparison
+        if (this == obj) return true;
+
+        // Check if obj is null
+        if(obj == null){
+            return false;
+        }
+
+        // Check if objects are different classes
+        if (!(obj instanceof Edge)) return false;
+
+        // Cast object
+        Edge other = (Edge) obj;
+
+        // Compare source and destination vertices of the edges
+        return source.equals(other.source) && destination.equals(other.destination);
+    }
 }
