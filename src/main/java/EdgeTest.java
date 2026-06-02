@@ -52,4 +52,26 @@ class EdgeTest {
         edge1.setWeight(21.1);
         assertEquals(21.1, edge1.getWeight(), "Weight should change to double passed into setWeight().");
     }
+
+    // Equality tests
+
+    @Test
+    void testSameAttributesEqual() {
+        assertEquals(edge1, edge1Copy, "Edges with the same source and destination vertices and weight should be considered equal.");
+    }
+
+    @Test
+    void testDiffSourceNotEqual() {
+        assertNotEquals(edgeDiffSource, edge1, "Edges with different source vertices but the same destination vertex and weight are not equal.");
+    }
+
+    @Test
+    void testDiffDestinationNotEqual() {
+        assertNotEquals(edgeDiffDest, edge1, "Edges with different destination vertices but the same source vertex and weight are not equal.");
+    }
+
+    @Test
+    void testDiffWeightNotEqual() {
+        assertNotEquals(edgeDiffWeight, edge1, "Edges with different weights but the same source and destination vertices should be considered equal.");
+    }
 }
