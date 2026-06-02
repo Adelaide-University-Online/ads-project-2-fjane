@@ -79,4 +79,13 @@ public class Edge {
         // Compare source and destination vertices of the edges
         return source.equals(other.source) && destination.equals(other.destination);
     }
+
+    /**
+     * Generates an edge's hashcode value based on source and destination vertices.
+     * @return a hashcode value
+     */
+    @Override
+    public int hashCode() {
+        return 31 * source.hashCode() * destination.hashCode();
+    }
 }
