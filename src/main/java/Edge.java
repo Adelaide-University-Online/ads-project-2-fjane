@@ -46,4 +46,10 @@ public class Edge {
         return weight;
     }
 
+    // Modifiers
+
+    /** Set the weight of an edge. */
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
 }
