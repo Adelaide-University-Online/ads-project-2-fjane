@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 /**
  * File: Graph.java
  * Description: This interface includes operations used to construct, manipulate, and traverse a graph data structure.
@@ -11,4 +13,28 @@
  **/
 public interface Graph {
 
+    /** Return the number of vertices. */
+    int numVertices();
+
+    /** Return the number of edges. */
+    int numEdges();
+
+    /** Return true if the graph is directed.  */
+    boolean isDirected();
+
+    /** Return true if the graph is weighted. */
+    boolean isWeighted();
+
+    /** Add a new Edge into the graph. */
+    void insert(Edge edge);
+
+    /** Return an iterator to the outgoing edges of a vertex.
+     * @param source The source vertex
+     */
+    Iterator<Edge> edgeIterator(String source);
+
+    /* Code inspired by:
+    Koffman, E.B., & Wolfgang, P.A.T. (2015). Data Structures: Abstraction and Design Using Java: Chapter 10 Graphs.
+    (3rd ed.). Wiley. http://ebookcentral.proquest.com/lib/adelaideuni/detail.action?docID=5106355
+    */
 }
