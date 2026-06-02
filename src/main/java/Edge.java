@@ -88,4 +88,13 @@ public class Edge {
     public int hashCode() {
         return 31 * source.hashCode() * destination.hashCode();
     }
+
+    /**
+     * Returns a String representation of this Edge object.
+     * @return formatted String containing source and destination vertices, and edge weight
+     */
+    @Override
+    public String toString() {
+        return source + " -> " + destination + " (" + weight + ") ";
+    }
 }
