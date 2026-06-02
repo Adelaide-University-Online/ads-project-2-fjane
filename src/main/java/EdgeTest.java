@@ -38,4 +38,18 @@ class EdgeTest {
     void testGetWeight() {
         assertEquals(2.0, edge1.getWeight());
     }
+
+    // Test default weight and weight modifier methods
+
+    @Test
+    void testNoWeightConstructor() {
+        assertEquals(1.0, edge2.getWeight(),
+                "Default weight when an edge is constructed without a weight argument is 1.0.");
+    }
+
+    @Test
+    void testSetWeight() {
+        edge1.setWeight(21.1);
+        assertEquals(21.1, edge1.getWeight(), "Weight should change to double passed into setWeight().");
+    }
 }
