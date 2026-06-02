@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class EdgeTest {
 
@@ -17,5 +20,22 @@ class EdgeTest {
         edgeDiffSource = new Edge("aaaa1234", "BBBB1234", 2.0);
         edgeDiffDest = new Edge("AAAA1234", "B1234", 2.0);
         edge2 = new Edge("AAAA1234", "BBBB1234");
+    }
+
+    // Accessor method tests
+
+    @Test
+    void testGetSource() {
+        assertEquals("AAAA1234", edge1.getSource());
+    }
+
+    @Test
+    void testGetDestination() {
+        assertEquals("BBBB1234", edge1.getDestination());
+    }
+
+    @Test
+    void testGetWeight() {
+        assertEquals(2.0, edge1.getWeight());
     }
 }
