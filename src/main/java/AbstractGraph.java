@@ -1,3 +1,5 @@
+import java.util.Set;
+
 /**
  * File: AbstractGraph.java
  * Description: This is an abstract base class for graphs that implements the Graph interface.
@@ -14,4 +16,29 @@
  *    the University's Academic Integrity Policy.
  **/
 public class AbstractGraph {
+
+    // Attributes
+    protected Set<String> vertices;
+    protected Set<Edge> edgeSet;
+    protected boolean directed;
+    protected boolean weighted;
+
+    // Constructors
+    public AbstractGraph(Set<String> vertices, Set<Edge> edgeSet, boolean directed, boolean weighted) {
+        this.vertices = vertices;
+        this.edgeSet = edgeSet;
+        this.directed = directed;
+        this.weighted = weighted;
+    }
+
+    public AbstractGraph(Set<String> vertices, Set<Edge> edgeSet, boolean directed) {
+        this.vertices = vertices;
+        this.edgeSet = edgeSet;
+        this.directed = directed;
+        this.weighted = false;
+    }
+
+    public AbstractGraph() {
+    }
+
 }
