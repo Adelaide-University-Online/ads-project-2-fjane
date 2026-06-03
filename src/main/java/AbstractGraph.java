@@ -16,7 +16,7 @@ import java.util.*;
  * This is my own work as defined by
  *    the University's Academic Integrity Policy.
  **/
-public class AbstractGraph{
+public abstract class AbstractGraph implements Graph{
 
     // Attributes
     protected Set<String> vertices;
