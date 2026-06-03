@@ -73,12 +73,12 @@ public abstract class AbstractGraph implements Graph{
 
             // Check if source vertex is in vertices list
             if (!vertexSet.contains(edge.getSource())) {
-                throw new IllegalStateException("Edge endpoint was not found in vertex list: " + edge.getSource());
+                throw new NoSuchElementException("Edge endpoint was not found in vertex list: " + edge.getSource());
             }
 
             // Check if destination vertex is in vertices list
             if (!vertexSet.contains(edge.getDestination())) {
-                throw new IllegalStateException("Edge endpoint was not found in vertex list." + edge.getDestination());
+                throw new NoSuchElementException("Edge endpoint was not found in vertex list." + edge.getDestination());
             }
         }
     }
