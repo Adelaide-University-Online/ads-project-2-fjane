@@ -16,7 +16,7 @@ import java.util.*;
  * This is my own work as defined by
  *    the University's Academic Integrity Policy.
  **/
-public class AbstractGraph {
+public class AbstractGraph{
 
     // Attributes
     protected Set<String> vertices;
@@ -52,6 +52,16 @@ public class AbstractGraph {
     /** Return whether graph is weighted. */
     public boolean isWeighted() {
         return weighted;
+    }
+
+    /** Return the number of vertices. */
+    public int numVertices() {
+        return vertices.size();
+    }
+
+    /** Return the number of edges. */
+    public int numEdges() {
+        return edgeSet.size();
     }
 
     /**
