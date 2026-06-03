@@ -20,6 +20,16 @@ public class MapGraph extends AbstractGraph {
     public MapGraph(Set<String> vertices, Set<Edge> edgeSet, boolean isDirected, boolean isWeighted) {
         super(vertices, edgeSet, isDirected, isWeighted);
         this.adjacencyMap = new LinkedHashMap<>();
+
+        // Add vertices to adjacency map as keys
+        for (String vertex : vertices) {
+            adjacencyMap.put(vertex, new LinkedList<String>());
+        }
+
+        // Add edges to corresponding vertices in adjacency map
+        for (Edge edge : edgeSet) {
+            insert(edge);
+        }
     }
 
     /**
