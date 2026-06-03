@@ -58,12 +58,17 @@ public class AbstractGraph {
      * Check if an edge's endpoints are in vertex list.
      */
     public void endpointValidation(){
+        // Loop through each edge
         for (Edge edge: edgeSet) {
+
+            // Check if source vertex is in vertices list
             if (!vertices.contains(edge.getSource())) {
                 throw new IllegalStateException(
                         edge.getSource() + " was not found."
                 );
             }
+
+            // Check if destination vertex is in vertices list
             if (!vertices.contains(edge.getDestination())) {
                 throw new IllegalStateException(
                         edge.getDestination() + " was not found."
