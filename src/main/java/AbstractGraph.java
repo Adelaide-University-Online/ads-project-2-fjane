@@ -57,22 +57,18 @@ public class AbstractGraph {
     /**
      * Check if an edge's endpoints are in vertex list.
      */
-    public void endpointValidation(){
+    public static void endpointValidation(Set<String> vertexSet, Set<Edge> edgeSet){
         // Loop through each edge
         for (Edge edge: edgeSet) {
 
             // Check if source vertex is in vertices list
-            if (!vertices.contains(edge.getSource())) {
-                throw new IllegalStateException(
-                        edge.getSource() + " was not found."
-                );
+            if (!vertexSet.contains(edge.getSource())) {
+                throw new IllegalStateException("Edge endpoint was not found in vertex list: " + edge.getSource());
             }
 
             // Check if destination vertex is in vertices list
-            if (!vertices.contains(edge.getDestination())) {
-                throw new IllegalStateException(
-                        edge.getDestination() + " was not found."
-                );
+            if (!vertexSet.contains(edge.getDestination())) {
+                throw new IllegalStateException("Edge endpoint was not found in vertex list." + edge.getDestination());
             }
         }
     }
@@ -122,6 +118,9 @@ public class AbstractGraph {
 
         // Populate edges from file
         Set<Edge> edgeSet = loadEdgesFromFile(scan);
+
+        // Validate edge endpoints
+        endpointValidation(vertexSet,edgeSet);
 
         return new MapGraph(vertexSet, edgeSet, isDirected, isWeighted);
     }
