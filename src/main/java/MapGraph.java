@@ -48,4 +48,27 @@ public class MapGraph extends AbstractGraph {
             adjacencyMap.computeIfAbsent(destination, d -> new LinkedList<>()).add(source);
         }
     }
+
+    /**
+     * Returns a String representation of an adjacency map. Vertices are listed one per line with any connected vertices
+     * to the right such that a vertex with multiple outgoing edges would be represented in the following format.
+     * source vertex: destination vertex, different destination vertex
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        // Add each map entry to StringBuilder one at a time
+        for (Map.Entry<String, List<String>> entry : adjacencyMap.entrySet()) {
+            // Source vertex
+            sb.append(entry.getKey()).append(": ");
+
+            // Add destination vertices to the right
+            String destinations = String.join(", ", entry.getValue());
+            sb.append(destinations);
+
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
