@@ -1,0 +1,26 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * File: MapGraph.java
+ * Description: This is a graph implementation that uses an adjacency-map to represent String vertices and edges. MapGraph is
+ * an extension of the AbstractGraph class.
+ * Author: Florence Sayavongsa
+ * Student ID: 3056629
+ * Email ID: florence.sayavongsa@student.adelaide.edu.au
+ * AI Tool Used: Y/N (This includes all AI Tools e.g. ChatGPT, Microsoft or Github Copiliot etc... Please leave blank if you do not wish to share this information)
+ * This is my own work as defined by
+ *    the University's Academic Integrity Policy.
+ **/
+
+public class MapGraph extends AbstractGraph {
+    // Attributes
+    private Map<String, Set<Edge>> adjacencyMap;
+
+    // Constructor
+    public MapGraph(Set<String> vertices, Set<Edge> edgeSet, boolean isDirected, boolean isWeighted) {
+        super(vertices, edgeSet, isDirected, isWeighted);
+        this.adjacencyMap = new LinkedHashMap<>();
+    }
+}
