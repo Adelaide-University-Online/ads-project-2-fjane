@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * File: CourseScheduler.java
  * Description: This is the entry to the application. It populates a course schedule based on a course file name and
@@ -14,5 +16,15 @@
 
 public class CourseScheduler {
 
+    /**
+     * Gets course code from user.
+     * @param userInput Scanner user input
+     * @return Scanner file reader containing the requested course file
+     */
+    public static String courseCode(Scanner userInput) {
 
+        // Get user input for course file name - case-insensitive by default
+        System.out.println("Please enter course file name. Eg: XBIT.txt");
+        return userInput.nextLine().trim();
+    }
 }
