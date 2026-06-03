@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -26,5 +28,22 @@ public class CourseScheduler {
         // Get user input for course file name - case-insensitive by default
         System.out.println("Please enter course file name. Eg: XBIT.txt");
         return userInput.nextLine().trim();
+    }
+
+    /**
+     * Imports course data from a text file. File cannot be empty.
+     * @param courseCode Course file name
+     * @return Scanner file reader containing the requested course file
+     */
+    public static Scanner course(String courseCode) throws FileNotFoundException, EmptyFileException {
+
+        Scanner fileScanner = new Scanner(new File(courseCode));
+
+        // Empty file check
+        if (!fileScanner.hasNextLine()) {
+            fileScanner.close();
+            throw new EmptyFileException("File is empty.\n");
+        }
+        return fileScanner;
     }
 }
