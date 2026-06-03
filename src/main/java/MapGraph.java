@@ -71,4 +71,19 @@ public class MapGraph extends AbstractGraph {
         }
         return sb.toString();
     }
+
+    /**
+     * Returns an iterator over all vertices connected to a given vertex.
+     * @param source The source vertex
+     * @return all given vertex's neighbours
+     */
+    @Override
+    public Iterator<String> edgeIterator(String source) {
+        // Check to see if vertex exists in map
+        if (!adjacencyMap.containsKey(source)) {
+            throw new NoSuchElementException("Vertex not found: " + source);
+        }
+
+        return adjacencyMap.get(source).iterator();
+    }
 }
