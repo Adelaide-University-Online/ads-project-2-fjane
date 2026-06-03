@@ -72,7 +72,37 @@ public class AbstractGraph {
         }
     }
 
-    /* Code inspired by:
+    /**
+     * Creates a collection of edges by parsing data from a text file.
+     * Any line in the text file that contains multiple elements is an indication of an edge where destination vertices
+     * are listed to the left of their source vertices.
+     * @param scan Scanner to read in text file
+     * @return Edges stored in a Set
+     */
+    public static Set<Edge> loadEdgesFromFile(Scanner scan)  {
+
+        Set<Edge> edgeSet = new HashSet<>();
+
+        // Loop through each line of the file
+        while (scan.hasNextLine()) {
+
+            // Process one line at a time
+            String line = scan.nextLine().trim();
+            if (line.isEmpty()) continue;
+
+            // Splice line by comma and white spaces
+            String[] parts = line.split(",\\s*");
+
+            // Create a new Edge(source, destination) for each vertex pair and add to edgeSet
+            for (int i = 0; i < parts.length-1; i++) {
+                Edge edge = new Edge(parts[i+1], parts[i]);
+                edgeSet.add(edge);
+            }
+        }
+        return edgeSet;
+    }
+
+    /* Class template inspired by:
     Koffman, E.B., & Wolfgang, P.A.T. (2015). Data Structures: Abstraction and Design Using Java: Chapter 10 Graphs.
     (3rd ed.). Wiley. http://ebookcentral.proquest.com/lib/adelaideuni/detail.action?docID=5106355
     */
