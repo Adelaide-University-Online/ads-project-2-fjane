@@ -1,4 +1,4 @@
-import java.util.Set;
+import java.util.*;
 
 /**
  * File: AbstractGraph.java
@@ -52,6 +52,24 @@ public class AbstractGraph {
     /** Return whether graph is weighted. */
     public boolean isWeighted() {
         return weighted;
+    }
+
+    /**
+     * Check if an edge's endpoints are in vertex list.
+     */
+    public void endpointValidation(){
+        for (Edge edge: edgeSet) {
+            if (!vertices.contains(edge.getSource())) {
+                throw new IllegalStateException(
+                        edge.getSource() + " was not found."
+                );
+            }
+            if (!vertices.contains(edge.getDestination())) {
+                throw new IllegalStateException(
+                        edge.getDestination() + " was not found."
+                );
+            }
+        }
     }
 
     /* Code inspired by:
