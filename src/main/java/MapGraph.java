@@ -1,6 +1,4 @@
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * File: MapGraph.java
@@ -16,11 +14,28 @@ import java.util.Set;
 
 public class MapGraph extends AbstractGraph {
     // Attributes
-    private Map<String, Set<Edge>> adjacencyMap;
+    private Map<String, List<String>> adjacencyMap;
 
     // Constructor
     public MapGraph(Set<String> vertices, Set<Edge> edgeSet, boolean isDirected, boolean isWeighted) {
         super(vertices, edgeSet, isDirected, isWeighted);
         this.adjacencyMap = new LinkedHashMap<>();
+    }
+
+    /**
+     * Adds new edges to the graph if it doesn't already exist.
+     * @param edge Edge to be added
+     */
+    public void insert(Edge edge) {
+        String source = edge.getSource();
+        String destination = edge.getDestination();
+
+        // Add edge by searching for map key (source vertex)
+        adjacencyMap.computeIfAbsent(source, s -> new LinkedList<>()).add(destination);
+
+        // Add edge in both directions if graph is undirected
+        if (!directed) {
+            adjacencyMap.computeIfAbsent(destination, d -> new LinkedList<>()).add(source);
+        }
     }
 }
