@@ -1,0 +1,73 @@
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class MapGraphTest {
+
+    protected Set<String> vertexSet;
+    protected Set<Edge> edgeSet;
+    protected AbstractGraph mapDirectedWeighted;
+    protected AbstractGraph mapUndirectedNotWeighted;
+
+    @BeforeEach
+    void setUp() {
+        vertexSet = new LinkedHashSet<>();
+        vertexSet.add("A");
+        vertexSet.add("B");
+        vertexSet.add("C");
+        vertexSet.add("C");
+
+        edgeSet = new HashSet<>();
+        edgeSet.add(new Edge("A", "B"));
+        edgeSet.add(new Edge("B", "C"));
+        edgeSet.add(new Edge("A", "C"));
+        edgeSet.add(new Edge("A", "C"));
+
+        mapDirectedWeighted = new MapGraph(vertexSet, edgeSet, true, true);
+        mapUndirectedNotWeighted = new MapGraph(vertexSet, edgeSet, false, false);
+    }
+
+    @Test
+    void testDuplicateVertices() {
+        assertEquals(3, mapDirectedWeighted.numVertices(), "Set prevents adding duplicate vertices.");
+    }
+
+    @Test
+    void testDuplicateEdges() {
+        assertEquals(3, mapDirectedWeighted.numEdges(), "Set prevents adding duplicate edges.");
+    }
+
+    @Test
+    void isDirected() {
+        assertTrue(mapDirectedWeighted.isDirected());
+    }
+
+    @Test
+    void isWeighted() {
+        assertTrue(mapDirectedWeighted.isWeighted());
+    }
+
+    @Test
+    void isNotDirected() {
+        assertFalse(mapUndirectedNotWeighted.isDirected());
+    }
+
+    @Test
+    void isNotWeighted() {
+        assertFalse(mapUndirectedNotWeighted.isWeighted());
+    }
+
+    @Test
+    void testEndpointValidation() {
+        edgeSet.add(new Edge("C", "E"));
+
+        assertThrows(NoSuchElementException.class, () ->
+                AbstractGraph.endpointValidation(vertexSet, edgeSet));
+    }
+}
