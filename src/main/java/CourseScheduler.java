@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -46,4 +47,62 @@ public class CourseScheduler {
         }
         return fileScanner;
     }
+
+    /**
+     * Gets the amount of subjects a user would like to study concurrently in a single study period. Maximum is 4
+     * in consideration of full-time in person, minimum is 1.
+     * @param userInput Scanner user input
+     * @return int The number of subjects to be studied per study period
+     */
+    public static int concurrentCourses(Scanner userInput){
+
+        int concurrent = 0;
+        int minLoad = 1;
+        int maxLoad = 4;
+
+        // Loop used to ensure valid integer (1-4) is entered
+        while (true) {
+
+            try {
+                // Get and save user input for concurrent courses
+                System.out.println("Enter the amount of concurrent subjects you wish to take per study period, between 1 and 4.");
+                concurrent = userInput.nextInt();
+
+                // Check user input is in range
+                if (concurrent < minLoad || concurrent > maxLoad) {
+                    throw new IllegalArgumentException("Number must be between 1 and 4.\n");
+                }
+
+                System.out.println();
+
+                break; // When an in range integer is entered
+
+            } catch (InputMismatchException e) { // Error if input is not integer type
+                System.err.println("Error: Please enter a valid number between 1 and 4.\n");
+                userInput.nextLine();
+
+            } catch (IllegalArgumentException e) { // Error if integer input is not in range
+                System.err.println("Error: " + e.getMessage());
+                userInput.nextLine();
+
+            } catch (IllegalStateException e) {
+                System.err.println("Scanner is closed unexpectedly.\n");
+                userInput.nextLine();
+            }
+        }
+        return concurrent;
+    }
+    /*
+    Exception handling code inspired by:
+
+    Khayalian, S. (2024, June 17). Mastering Java Exception Handling: A Comprehensive Guide for Developers.
+    https://medium.com/@ShantKhayalian/mastering-java-exception-handling-a-comprehensive-guide-for-developers-c31cef921d75
+
+    Geeksforgeeks. (2025, July 23). Types of Exception in Java with Examples.
+    https://www.geeksforgeeks.org/java/types-of-exception-in-java-with-examples/
+
+    w3resource. (2025, May 23). Java Program: File reading and empty file exception handling.
+    https://www.w3resource.com/java-exercises/exception/java-exception-exercise-5.php
+    */
+
 }
