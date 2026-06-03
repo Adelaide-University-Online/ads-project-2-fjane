@@ -2,7 +2,8 @@ import java.util.Set;
 
 /**
  * File: AbstractGraph.java
- * Description: This is an abstract base class for graphs that implements the Graph interface.
+ * Description: This is an abstract base class for graphs that implements the Graph interface. A graph is a non-linear
+ * data structure that consists of vertices and edges.
  * A graph can be:
  * undirected - edges represent a two-way connection between vertices.
  * directed - edges represent a one-way connection between vertices. Source and destination vertices must be defined.
