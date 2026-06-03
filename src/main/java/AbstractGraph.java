@@ -41,4 +41,20 @@ public class AbstractGraph {
     public AbstractGraph() {
     }
 
+    // Accessor methods
+
+    /** Return whether graph is directed. */
+    public boolean isDirected() {
+        return directed;
+    }
+
+    /** Return whether graph is weighted. */
+    public boolean isWeighted() {
+        return weighted;
+    }
+
+    /* Code inspired by:
+    Koffman, E.B., & Wolfgang, P.A.T. (2015). Data Structures: Abstraction and Design Using Java: Chapter 10 Graphs.
+    (3rd ed.). Wiley. http://ebookcentral.proquest.com/lib/adelaideuni/detail.action?docID=5106355
+    */
 }
