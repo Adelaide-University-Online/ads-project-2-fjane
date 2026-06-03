@@ -102,6 +102,25 @@ public class AbstractGraph {
         return edgeSet;
     }
 
+    /**
+     * Creates a new graph by building vertices and edges from imported data.
+     * Text file format: first line is a list of comma separated vertices, each following line defines a vertex and if
+     * they are connected to other vertices by an edge.
+     * @param scan       Text data file scanner
+     * @param isDirected true for a directed graph
+     * @param isWeighted true for a weighted graph
+     */
+    public static AbstractGraph createGraph(Scanner scan, boolean isDirected, boolean isWeighted) {
+        // Parse vertices in first line and save as Set
+        String[] labels = scan.nextLine().trim().split(",\\s*");
+        Set<String> vertexSet = new LinkedHashSet<>(Arrays.asList(labels));
+
+        // Populate edges from file
+        Set<Edge> edgeSet = loadEdgesFromFile(scan);
+
+        return new MapGraph(vertexSet, edgeSet, isDirected, isWeighted);
+    }
+
     /* Class template inspired by:
     Koffman, E.B., & Wolfgang, P.A.T. (2015). Data Structures: Abstraction and Design Using Java: Chapter 10 Graphs.
     (3rd ed.). Wiley. http://ebookcentral.proquest.com/lib/adelaideuni/detail.action?docID=5106355
