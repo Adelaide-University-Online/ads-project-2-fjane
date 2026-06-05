@@ -35,7 +35,7 @@ class GraphAlgorithmsTest {
     @Test
     void testKhansReturnSize() {
         List<String> result = GraphAlgorithms.kahnsTopological(mapDirected);
-        assertEquals(result.size(), mapDirected.numVertices(),
+        assertEquals(mapDirected.numVertices(), result.size(),
                 "Kahns result should include all vertices if no cycles exist.");
     }
 
@@ -61,7 +61,7 @@ class GraphAlgorithmsTest {
         List<String> result = GraphAlgorithms.kahnsTopological(mapDirected);
         List<String> sortedVertices = new ArrayList<>(mapDirected.getVertices());
         Collections.sort(sortedVertices);
-        assertEquals(result, sortedVertices,
+        assertEquals(sortedVertices, result,
                 "Edges in graph were purposely written so vertices would appear in alphabetical order if method is correct.");
     }
 
@@ -70,7 +70,7 @@ class GraphAlgorithmsTest {
         vertexSet.add("F");
         MapGraph mapDisconnectedVertex = new MapGraph(vertexSet, edgeSet, true, false);
         List<String> result = GraphAlgorithms.kahnsTopological(mapDisconnectedVertex);
-        assertEquals(result.size(), mapDisconnectedVertex.numVertices(),
+        assertEquals(mapDisconnectedVertex.numVertices(), result.size(),
                 "Kahns topological sort should include all vertices - including those that are disconnected.");
     }
 }
