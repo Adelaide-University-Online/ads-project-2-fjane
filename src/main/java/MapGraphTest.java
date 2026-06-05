@@ -79,6 +79,7 @@ class MapGraphTest {
         edgeSet.add(new Edge("C", "E"));
 
         assertThrows(NoSuchElementException.class, () ->
-                AbstractGraph.endpointValidation(vertexSet, edgeSet));
+                AbstractGraph.endpointValidation(vertexSet, edgeSet),
+                "Exception should be thrown when attempting to add a new edge with a vertex that doesn't exist in the vertex set.");
     }
 }
