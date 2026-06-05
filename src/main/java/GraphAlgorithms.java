@@ -17,7 +17,7 @@ public class GraphAlgorithms {
      * @return SortResult containing BFS levels and a prerequisites map per course.
      * @throws IllegalStateException if a cycle is detected.
      */
-    public static List<String> khansTopological(AbstractGraph graph) {
+    public static List<String> kahnsTopological(AbstractGraph graph) {
         // Build a hashmap to store each vertex's in-degree
         Map<String, Integer> inDegree = new HashMap<>();
 
