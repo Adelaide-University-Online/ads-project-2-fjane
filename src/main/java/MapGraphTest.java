@@ -44,6 +44,17 @@ class MapGraphTest {
     }
 
     @Test
+    void testUndirectedVertices() {
+        assertEquals(3, mapUndirectedNotWeighted.numVertices(), "Number of vertices should remain the same.");
+    }
+
+    @Test
+    void testUndirectedEdges() {
+        assertEquals(6, mapUndirectedNotWeighted.numEdges(),
+                "Edge count should double as a new edge in the reverse direction is created.");
+    }
+
+    @Test
     void isDirected() {
         assertTrue(mapDirectedWeighted.isDirected());
     }
