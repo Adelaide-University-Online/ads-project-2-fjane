@@ -1,0 +1,44 @@
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.*;
+
+class GraphAlgorithmsTest {
+
+    protected Set<String> vertexSet;
+    protected Set<Edge> edgeSet;
+    protected AbstractGraph mapDirected;
+    protected AbstractGraph mapUndirected;
+
+    @BeforeEach
+    void setUp() {
+        vertexSet = new LinkedHashSet<>();
+        vertexSet.add("A");
+        vertexSet.add("B");
+        vertexSet.add("C");
+        vertexSet.add("D");
+        vertexSet.add("E");
+
+        edgeSet = new HashSet<>();
+        edgeSet.add(new Edge("A", "B"));
+        edgeSet.add(new Edge("B", "D"));
+        edgeSet.add(new Edge("A", "C"));
+        edgeSet.add(new Edge("C", "E"));
+
+        mapDirected = new MapGraph(vertexSet, edgeSet, true, false);
+        mapUndirected = new MapGraph(vertexSet, edgeSet, false, false);
+    }
+
+    @Test
+    void testKhansReturnSize() {
+        List<String> result = GraphAlgorithms.kahnsTopological(mapDirected);
+        assertEquals(result.size(), mapDirected.numVertices());
+    }
+
+    @Test
+    void testCyclicException() {
+        assertThrows(IllegalStateException.class, () ->
+                GraphAlgorithms.kahnsTopological(mapUndirected));
+    }
+}
