@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * File: MapGraph.java
@@ -14,16 +15,16 @@ import java.util.*;
 
 public class MapGraph extends AbstractGraph {
     // Attributes
-    private Map<String, List<String>> adjacencyMap;
+    private Map<String, Set<Edge>> adjacencyMap;
 
     // Constructor
-    public MapGraph(Set<String> vertices, Set<Edge> edgeSet, boolean isDirected, boolean isWeighted) {
-        super(vertices, edgeSet, isDirected, isWeighted);
+    public MapGraph(Set<String> vertices, Set<Edge> edgeSet, boolean directed, boolean weighted) {
+        super(vertices, edgeSet, directed, weighted);
         this.adjacencyMap = new LinkedHashMap<>();
 
         // Add vertices to adjacency map as keys
         for (String vertex : vertices) {
-            adjacencyMap.put(vertex, new LinkedList<String>());
+            adjacencyMap.put(vertex, new LinkedHashSet<>());
         }
 
         // Add edges to corresponding vertices in adjacency map
@@ -41,11 +42,13 @@ public class MapGraph extends AbstractGraph {
         String destination = edge.getDestination();
 
         // Add edge by searching for map key (source vertex)
-        adjacencyMap.computeIfAbsent(source, s -> new LinkedList<>()).add(destination);
+        adjacencyMap.putIfAbsent(source, new LinkedHashSet<>());
+        adjacencyMap.get(source).add(edge);
 
         // Add edge in both directions if graph is undirected
         if (!directed) {
-            adjacencyMap.computeIfAbsent(destination, d -> new LinkedList<>()).add(source);
+            adjacencyMap.putIfAbsent(destination, new LinkedHashSet<>());
+            adjacencyMap.get(destination).add(new Edge(destination, source));
         }
     }
 
@@ -59,15 +62,15 @@ public class MapGraph extends AbstractGraph {
         StringBuilder sb = new StringBuilder();
 
         // Add each map entry to StringBuilder one at a time
-        for (Map.Entry<String, List<String>> entry : adjacencyMap.entrySet()) {
+        for (Map.Entry<String, Set<Edge>> entry : adjacencyMap.entrySet()) {
             // Source vertex
             sb.append(entry.getKey()).append(": ");
 
             // Add destination vertices to the right
-            String destinations = String.join(", ", entry.getValue());
-            sb.append(destinations);
-
-            sb.append("\n");
+            String destinations = entry.getValue().stream()
+                    .map(Edge::getDestination)
+                    .collect(Collectors.joining(", "));
+            sb.append(destinations).append("\n");
         }
         return sb.toString();
     }
@@ -78,7 +81,7 @@ public class MapGraph extends AbstractGraph {
      * @return all given vertex's neighbours
      */
     @Override
-    public Iterator<String> edgeIterator(String source) {
+    public Iterator<Edge> edgeIterator(String source) {
         // Check to see if vertex exists in map
         if (!adjacencyMap.containsKey(source)) {
             throw new NoSuchElementException("Vertex not found: " + source);
