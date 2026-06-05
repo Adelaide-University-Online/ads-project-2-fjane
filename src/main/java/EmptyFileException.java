@@ -1,3 +1,14 @@
+/**
+ * File: EmptyFileException.java
+ * Description: Thrown to indicate an empty file with no data has been scanned. It is an unchecked exception thrown
+ * when attempting to read data.
+ * Author: Florence Sayavongsa
+ * Student ID: 3056629
+ * Email ID: florence.sayavongsa@student.adelaide.edu.au
+ * AI Tool Used: Y/N (This includes all AI Tools e.g. ChatGPT, Microsoft or Github Copiliot etc... Please leave blank if you do not wish to share this information)
+ * This is my own work as defined by
+ *    the University's Academic Integrity Policy.
+ **/
 public class EmptyFileException extends RuntimeException {
     public EmptyFileException(String message) {
         super(message);
