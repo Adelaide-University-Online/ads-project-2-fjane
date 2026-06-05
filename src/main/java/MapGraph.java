@@ -19,7 +19,7 @@ public class MapGraph extends AbstractGraph {
 
     // Constructor
     public MapGraph(Set<String> vertices, Set<Edge> edgeSet, boolean directed, boolean weighted) {
-        super(vertices, edgeSet, directed, weighted);
+        super(vertices, new LinkedHashSet<>(), directed, weighted);
         this.adjacencyMap = new LinkedHashMap<>();
 
         // Add vertices to adjacency map as keys
@@ -44,11 +44,14 @@ public class MapGraph extends AbstractGraph {
         // Add edge by searching for map key (source vertex)
         adjacencyMap.putIfAbsent(source, new LinkedHashSet<>());
         adjacencyMap.get(source).add(edge);
+        this.edgeSet.add(edge);
 
         // Add edge in both directions if graph is undirected
         if (!directed) {
+            Edge reverseEdge = new Edge(destination, source);
             adjacencyMap.putIfAbsent(destination, new LinkedHashSet<>());
-            adjacencyMap.get(destination).add(new Edge(destination, source));
+            adjacencyMap.get(destination).add(reverseEdge);
+            this.edgeSet.add(reverseEdge);
         }
     }
 
@@ -89,4 +92,5 @@ public class MapGraph extends AbstractGraph {
 
         return adjacencyMap.get(source).iterator();
     }
+
 }
