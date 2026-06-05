@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ import java.util.Scanner;
 
 public class CourseScheduler {
 
-    static void main(String[] args) {
+    static void main(String[] args) throws FileNotFoundException {
         // Scanner 1: user input
         Scanner userInput = new Scanner(System.in);
 
@@ -49,15 +50,14 @@ public class CourseScheduler {
         // Parse text file data to new graph object creation
         AbstractGraph graph = AbstractGraph.createGraph(fileScanner, true, false);
 
-        // TEST ---
-        System.out.println(graph);
-
         // Sort graph vertices into a linear order
         List<String> courseBuilder = GraphAlgorithms.kahnsTopological(graph);
 
-        // TEST ---
-        System.out.println(courseBuilder);
+        // Number of courses user wants to take concurrently per study period
+        int concurrent = concurrentCourses(userInput);
 
+        // Write populated course schedule to txt file and print to screen
+        printPlan(courseBuilder, concurrent, courseCode);
     }
 
     /**
@@ -146,5 +146,56 @@ public class CourseScheduler {
     https://www.w3resource.com/java-exercises/exception/java-exception-exercise-5.php
     */
 
+    /**
+     * Populates course schedule, prints to screen, and writes to text file.
+     * Course schedule breaks up sorted list of courses by number of concurrent subjects to be taken per study period.
+     * @param courses Ordered list of courses returned by Kahn's topological sort algorithm
+     * @param coursesPerTerm Amount of subjects user wishes to enrol in per study period
+     * @param courseCode     Code of the course provided by user
+     * @throws FileNotFoundException
+     */
+    public static void printPlan(List<String> courses, int coursesPerTerm, String courseCode) throws FileNotFoundException {
 
+        // Integer for print
+        int studyPeriod = 1;
+
+        try {
+            // Initialize PrintWriter with new File object
+            PrintWriter writer = new PrintWriter("courseSchedule.txt");
+
+            // Print course code title
+            writer.println("Course Code: " + courseCode.replace(".txt", "").toUpperCase());
+            writer.println("");
+
+            System.out.println("Course Code: " + courseCode.replace(".txt", "").toUpperCase() + "\n");
+            writer.println("");
+
+            for (int i = 0; i < courses.size(); i += coursesPerTerm) {
+                // Splice course subject list by study period load
+                // Use Math.min to keep index inbound - returns smaller of the two elements
+                List<String> studyCourses = courses.subList(i, Math.min(i + coursesPerTerm, courses.size()));
+
+                // Write data to the file
+                writer.println("Study Period " + studyPeriod + ": " + String.join(", ", studyCourses));
+
+                // Print sublists per study period
+                System.out.println("Study Period " + studyPeriod + ": " + String.join(", ", studyCourses));
+
+                studyPeriod++;
+            }
+
+            // Close the PrintWriter
+            writer.close();
+
+            System.out.println("\nFile written successfully.");
+
+        } catch (Exception e) {
+            // Handles permission denied or disk full errors
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+    }
+    /*
+    Code inspired by:
+    Portianko, V. (2025, January 4). Java PrintWriter Class. https://codegym.cc/groups/posts/java-printwriter-class
+     */
 }
