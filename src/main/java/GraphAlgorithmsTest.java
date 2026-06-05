@@ -35,13 +35,15 @@ class GraphAlgorithmsTest {
     @Test
     void testKhansReturnSize() {
         List<String> result = GraphAlgorithms.kahnsTopological(mapDirected);
-        assertEquals(result.size(), mapDirected.numVertices());
+        assertEquals(result.size(), mapDirected.numVertices(),
+                "Kahns result should include all vertices if no cycles exist.");
     }
 
     @Test
     void testCyclicException() {
         assertThrows(IllegalStateException.class, () ->
-                GraphAlgorithms.kahnsTopological(mapUndirected));
+                GraphAlgorithms.kahnsTopological(mapUndirected),
+                "Undirected graphs create cycles and should throw exception.");
     }
 
     @Test
