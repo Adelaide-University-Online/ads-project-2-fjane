@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * File: Graph.java
@@ -18,6 +19,12 @@ public interface Graph {
 
     /** Return the number of edges. */
     int numEdges();
+
+    /** Return all the vertices in a graph. */
+    Set<String> getVertices();
+
+    /** Return all the edges in a graph. */
+    Set<Edge> getEdgeSet();
 
     /** Return true if the graph is directed.  */
     boolean isDirected();

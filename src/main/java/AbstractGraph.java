@@ -64,6 +64,16 @@ public abstract class AbstractGraph implements Graph{
         return edgeSet.size();
     }
 
+    /** Return all the vertices in a graph. */
+    public Set<String> getVertices(){
+        return vertices;
+    }
+
+    /** Return all the edges in a graph. */
+    public Set<Edge> getEdgeSet(){
+        return edgeSet;
+    }
+
     /**
      * Check if an edge's endpoints are in vertex list.
      */
@@ -84,7 +94,7 @@ public abstract class AbstractGraph implements Graph{
     }
 
     /**
-     * Creates a collection of edges by parsing data from a text file.
+     * Creates a collection of outgoing edges by parsing data from a text file.
      * Any line in the text file that contains multiple elements is an indication of an edge where destination vertices
      * are listed to the left of their source vertices.
      * @param scan Scanner to read in text file
