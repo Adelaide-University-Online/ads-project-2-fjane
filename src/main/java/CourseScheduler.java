@@ -1,6 +1,8 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -18,6 +20,45 @@ import java.util.Scanner;
  **/
 
 public class CourseScheduler {
+
+    static void main(String[] args) {
+        // Scanner 1: user input
+        Scanner userInput = new Scanner(System.in);
+
+        // Scanner 2: file reader
+        Scanner fileScanner = null;
+
+        // Code of course to be scheduled
+        String courseCode = null;
+
+        /*
+        Call methods that get user input and validate file read. Loop and continues to throw exceptions until valid
+        course file is imported.
+         */
+        while (fileScanner == null) {
+            try {
+                courseCode = courseCode(userInput);
+                fileScanner = course(courseCode);
+            } catch (FileNotFoundException e) { // IOException - checked exception, will also handle empty userInput
+                System.err.println("Error: File not found. Try again.");
+            } catch (EmptyFileException e) { // File exists but is empty
+                System.err.println("Error: " + e.getMessage());
+            }
+        }
+
+        // Parse text file data to new graph object creation
+        AbstractGraph graph = AbstractGraph.createGraph(fileScanner, true, false);
+
+        // TEST ---
+        System.out.println(graph);
+
+        // Sort graph vertices into a linear order
+        List<String> courseBuilder = GraphAlgorithms.kahnsTopological(graph);
+
+        // TEST ---
+        System.out.println(courseBuilder);
+
+    }
 
     /**
      * Gets course code from user.
@@ -104,5 +145,6 @@ public class CourseScheduler {
     w3resource. (2025, May 23). Java Program: File reading and empty file exception handling.
     https://www.w3resource.com/java-exercises/exception/java-exception-exercise-5.php
     */
+
 
 }
