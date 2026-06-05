@@ -45,6 +45,16 @@ class GraphAlgorithmsTest {
     }
 
     @Test
+    void testOneCyclicException() {
+        // Add edge that will produce a cycle
+        edgeSet.add(new Edge("B", "A"));
+        MapGraph mapDirectedCyclic = new MapGraph(vertexSet, edgeSet, true, false);
+        assertThrows(IllegalStateException.class, () ->
+                GraphAlgorithms.kahnsTopological(mapDirectedCyclic),
+                "Kahns topological sort method will not work on cyclic graphs.");
+    }
+
+    @Test
     void testKhansReturnSort() {
         List<String> result = GraphAlgorithms.kahnsTopological(mapDirected);
         List<String> sortedVertices = new ArrayList<>(mapDirected.getVertices());
