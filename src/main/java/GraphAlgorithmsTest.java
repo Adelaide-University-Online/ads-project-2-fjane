@@ -64,4 +64,13 @@ class GraphAlgorithmsTest {
         assertEquals(result, sortedVertices,
                 "Edges in graph were purposely written so vertices would appear in alphabetical order if method is correct.");
     }
+
+    @Test
+    void testKhansDisconnectedVertex() {
+        vertexSet.add("F");
+        MapGraph mapDisconnectedVertex = new MapGraph(vertexSet, edgeSet, true, false);
+        List<String> result = GraphAlgorithms.kahnsTopological(mapDisconnectedVertex);
+        assertEquals(result.size(), mapDisconnectedVertex.numVertices(),
+                "Kahns topological sort should include all vertices - including those that are disconnected.");
+    }
 }
