@@ -22,9 +22,11 @@ class GraphAlgorithmsTest {
 
         edgeSet = new HashSet<>();
         edgeSet.add(new Edge("A", "B"));
-        edgeSet.add(new Edge("B", "D"));
-        edgeSet.add(new Edge("A", "C"));
-        edgeSet.add(new Edge("C", "E"));
+        edgeSet.add(new Edge("B", "C"));
+        edgeSet.add(new Edge("C", "D"));
+        edgeSet.add(new Edge("D", "E"));
+        edgeSet.add(new Edge("A", "D"));
+        edgeSet.add(new Edge("A", "E"));
 
         mapDirected = new MapGraph(vertexSet, edgeSet, true, false);
         mapUndirected = new MapGraph(vertexSet, edgeSet, false, false);
@@ -40,5 +42,14 @@ class GraphAlgorithmsTest {
     void testCyclicException() {
         assertThrows(IllegalStateException.class, () ->
                 GraphAlgorithms.kahnsTopological(mapUndirected));
+    }
+
+    @Test
+    void testKhansReturnSort() {
+        List<String> result = GraphAlgorithms.kahnsTopological(mapDirected);
+        List<String> sortedVertices = new ArrayList<>(mapDirected.getVertices());
+        Collections.sort(sortedVertices);
+        assertEquals(result, sortedVertices,
+                "Edges in graph were purposely written so vertices would appear in alphabetical order if method is correct.");
     }
 }
