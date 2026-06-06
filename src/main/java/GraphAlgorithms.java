@@ -47,43 +47,34 @@ public class GraphAlgorithms {
     }
 
     /**
-     * This algorithm applies topological sort using Kahn's Breadth-First Search algorithm to arrange vertices of a
-     * directed acyclic graph in linear order ensuring ordering does not violate vertex ordering of directed edges.
-     * @return SortResult containing BFS levels and a prerequisites map per course.
-     * @throws IllegalStateException if a cycle is detected.
+     * Applies topological sort using a modified version of Kahn's Breadth-First Search algorithm to arrange vertices
+     * of a directed acyclic graph in linear order ensuring ordering does not violate vertex ordering of directed edges.
+     * This modified version uses a priority queue based on vertices with the highest number of outgoing edges and
+     * no incoming edges.
+     * @return A list of elements that obey edge directionality
+     * @throws IllegalStateException if a cycle is detected
      */
     public static List<String> kahnsTopological(AbstractGraph graph) {
-        // Build a hashmap to store each vertex's in-degree
-        Map<String, Integer> inDegree = new HashMap<>();
+        // Build a hashmap to store each vertex's in and out-degree
+        degrees = degreesMap(graph);
 
-        // Initialize with 0 for each vertex
-        for (String vertex : graph.getVertices()) {
-            inDegree.put(vertex, 0);
-        }
+        // Create a priority queue to store elements with an in-degree of 0, prioritized by highest out-degree
+        PriorityQueue<String> noIncoming = new PriorityQueue<>(
+                // Descending order comparison of vertices out-degree
+                (a, b) -> Integer.compare(degrees.get(b)[1], degrees.get(a)[1])
+        );
 
-        // Count incoming edges for each vertex
-        for (String vertex : graph.getVertices()) {
-            Iterator<Edge> edgeIterator = graph.edgeIterator(vertex);
-
-            // Loop through all edges
-            while (edgeIterator.hasNext()) {
-                Edge edge = edgeIterator.next();
-
-                // Increment destinations in-degree
-                inDegree.merge(edge.getDestination(), 1, Integer::sum);
+        // Add elements with in-degree of 0 to priority queue
+        for (Map.Entry<String, int[]> entry : degrees.entrySet()) {
+            if (entry.getValue()[0] == 0){
+                noIncoming.add(entry.getKey());
             }
-        }
-
-        // Create a queue and add vertices with 0 in-degree
-        Queue<String> noIncoming = new ArrayDeque<>();
-        for (Map.Entry<String, Integer> entry : inDegree.entrySet()) {
-            if (entry.getValue() == 0) noIncoming.add(entry.getKey());
         }
 
         // Create a list to store topological sort result
         List<String> topoResult = new ArrayList<>();
 
-        // Process vertices in queue
+        // Process vertices in priority queue
         while (!noIncoming.isEmpty()) {
 
             // Remove first vertex in sort queue and add to result list
@@ -100,11 +91,11 @@ public class GraphAlgorithms {
                 // Get neighbour of current vertex
                 String neighbour = edge.getDestination();
 
-                // Decrement in-degree as 'current' vertex (source vertex) has now been processed
-                inDegree.put(neighbour, inDegree.get(neighbour) - 1);
+                // Decrement in-degree
+                degrees.get(neighbour)[0]--;
 
                 // If neighbour now has in-degree of 0, add it to the queue
-                if (inDegree.get(neighbour) == 0) noIncoming.add(neighbour);
+                if (degrees.get(neighbour)[0] == 0) noIncoming.add(neighbour);
             }
         }
 
