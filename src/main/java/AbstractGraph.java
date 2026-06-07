@@ -73,14 +73,27 @@ public abstract class AbstractGraph implements Graph{
         return vertices;
     }
 
-    /** Return all vertices and its number of incoming and outgoing edges. */
+    /** Return all the edges in a graph. */
     public Set<Edge> getEdgeSet(){
         return edgeSet;
     }
 
-    /** Return all the edges in a graph. */
-    public Map<String, int[]> getDegrees(){
-        return degrees;
+    /** Return all vertices with number of incoming edges. */
+    public Map<String, Integer> getInDegrees(){
+        Map<String, Integer> inDegrees = new HashMap<>();
+        for (Map.Entry<String, int[]> entry : degrees.entrySet()) {
+            inDegrees.put(entry.getKey(), entry.getValue()[0]);
+        }
+        return inDegrees;
+    }
+
+    /** Return all vertices with number of outgoing edges. */
+    public Map<String, Integer> getOutDegrees(){
+        Map<String, Integer> outDegrees = new HashMap<>();
+        for (Map.Entry<String, int[]> entry : degrees.entrySet()) {
+            outDegrees.put(entry.getKey(), entry.getValue()[1]);
+        }
+        return outDegrees;
     }
 
     // Modifier methods
