@@ -23,6 +23,7 @@ public abstract class AbstractGraph implements Graph{
     protected Set<Edge> edgeSet;
     protected boolean directed;
     protected boolean weighted;
+    protected Map<String, int[]> degrees; // Vertex: [0] in-degree, [1] out-degree
 
     // Constructors
     public AbstractGraph(Set<String> vertices, Set<Edge> edgeSet, boolean directed, boolean weighted) {
@@ -69,9 +70,14 @@ public abstract class AbstractGraph implements Graph{
         return vertices;
     }
 
-    /** Return all the edges in a graph. */
+    /** Return all vertices and its number of incoming and outgoing edges. */
     public Set<Edge> getEdgeSet(){
         return edgeSet;
+    }
+
+    /** Return all the edges in a graph. */
+    public Map<String, int[]> getDegrees(){
+        return degrees;
     }
 
     /**
