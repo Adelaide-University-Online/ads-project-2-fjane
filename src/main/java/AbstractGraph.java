@@ -31,6 +31,12 @@ public abstract class AbstractGraph implements Graph{
         this.edgeSet = edgeSet;
         this.directed = directed;
         this.weighted = weighted;
+
+        // Initialize degrees for all vertices
+        this.degrees = new HashMap<>();
+        for (String vertex : vertices) {
+            degrees.put(vertex, new int[]{0, 0});
+        }
     }
 
     public AbstractGraph(Set<String> vertices, Set<Edge> edgeSet, boolean directed) {
@@ -38,9 +44,16 @@ public abstract class AbstractGraph implements Graph{
         this.edgeSet = edgeSet;
         this.directed = directed;
         this.weighted = false;
+
+        // Initialise degrees for all vertices
+        this.degrees = new HashMap<>();
+        for (String vertex : vertices) {
+            degrees.put(vertex, new int[]{0, 0});
+        }
     }
 
     public AbstractGraph() {
+        this.degrees = new HashMap<>();
     }
 
     // Accessor methods
