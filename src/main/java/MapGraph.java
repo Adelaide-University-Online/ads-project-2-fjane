@@ -46,12 +46,22 @@ public class MapGraph extends AbstractGraph {
         adjacencyMap.get(source).add(edge);
         this.edgeSet.add(edge);
 
+        // Update degrees map incrementally
+        degrees.putIfAbsent(source, new int[]{0, 0});
+        degrees.putIfAbsent(destination, new int[]{0, 0});
+        degrees.get(source)[1]++;       // source out-degree
+        degrees.get(destination)[0]++;  // destination in-degree
+
         // Add edge in both directions if graph is undirected
         if (!directed) {
             Edge reverseEdge = new Edge(destination, source);
             adjacencyMap.putIfAbsent(destination, new LinkedHashSet<>());
             adjacencyMap.get(destination).add(reverseEdge);
             this.edgeSet.add(reverseEdge);
+
+            // Update degrees map for edges in the opposite direction
+            degrees.get(destination)[1]++;
+            degrees.get(source)[0]++;
         }
     }
 
