@@ -31,12 +31,7 @@ public abstract class AbstractGraph implements Graph{
         this.edgeSet = edgeSet;
         this.directed = directed;
         this.weighted = weighted;
-
-        // Initialize degrees for all vertices
-        this.degrees = new HashMap<>();
-        for (String vertex : vertices) {
-            degrees.put(vertex, new int[]{0, 0});
-        }
+        initializeDegrees(vertices);
     }
 
     public AbstractGraph(Set<String> vertices, Set<Edge> edgeSet, boolean directed) {
@@ -44,12 +39,7 @@ public abstract class AbstractGraph implements Graph{
         this.edgeSet = edgeSet;
         this.directed = directed;
         this.weighted = false;
-
-        // Initialise degrees for all vertices
-        this.degrees = new HashMap<>();
-        for (String vertex : vertices) {
-            degrees.put(vertex, new int[]{0, 0});
-        }
+        initializeDegrees(vertices);
     }
 
     public AbstractGraph() {
@@ -92,6 +82,22 @@ public abstract class AbstractGraph implements Graph{
     public Map<String, int[]> getDegrees(){
         return degrees;
     }
+
+    // Modifier methods
+
+    /**
+     * Initializes a graph's degree map with 0 in-degree and out-degree for each provided vertex.
+     * Called by constructors when vertices are provided.
+     * @param vertices Set of String vertices
+     */
+    private void initializeDegrees(Set<String> vertices) {
+        this.degrees = new HashMap<>();
+        for (String vertex : vertices) {
+            degrees.put(vertex, new int[]{0, 0});
+        }
+    }
+
+    // Other methods
 
     /**
      * Check if an edge's endpoints are in vertex list.
