@@ -2,7 +2,7 @@ import java.util.*;
 
 /**
  * File: GraphAlgorithms.java
- * Description: This class is intended to be a collection of algorithms that can be applied to various graph types.
+ * Description: This class is intended to be a collection of algorithms that can be applied to directed graphs.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
  * Email ID: florence.sayavongsa@student.adelaide.edu.au
@@ -11,33 +11,17 @@ import java.util.*;
  *    the University's Academic Integrity Policy.
  **/
 public class GraphAlgorithms {
+
     /**
-     * This algorithm applies topological sort using Kahn's Breadth-First Search algorithm to arrange vertices of a
-     * directed acyclic graph in linear order ensuring ordering does not violate vertex ordering of directed edges.
-     * @return SortResult containing BFS levels and a prerequisites map per course.
-     * @throws IllegalStateException if a cycle is detected.
+     * Applies topological sort using Kahn's Breadth-First Search algorithm to arrange vertices of a directed acyclic
+     * graph in linear order ensuring vertex ordering of directed edges is not violated.
+     * @return List of sorted vertices
+     * @throws IllegalStateException if a cycle is detected
      */
     public static List<String> kahnsTopological(AbstractGraph graph) {
-        // Build a hashmap to store each vertex's in-degree
-        Map<String, Integer> inDegree = new HashMap<>();
 
-        // Initialize with 0 for each vertex
-        for (String vertex : graph.getVertices()) {
-            inDegree.put(vertex, 0);
-        }
-
-        // Count incoming edges for each vertex
-        for (String vertex : graph.getVertices()) {
-            Iterator<Edge> edgeIterator = graph.edgeIterator(vertex);
-
-            // Loop through all edges
-            while (edgeIterator.hasNext()) {
-                Edge edge = edgeIterator.next();
-
-                // Increment destinations in-degree
-                inDegree.merge(edge.getDestination(), 1, Integer::sum);
-            }
-        }
+        // Create a new map to hold vertex in-degree information (to prevent mutating graph state)
+        Map<String, Integer> inDegree = graph.getInDegrees();
 
         // Create a queue and add vertices with 0 in-degree
         Queue<String> noIncoming = new ArrayDeque<>();
