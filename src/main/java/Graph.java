@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -25,6 +26,9 @@ public interface Graph {
 
     /** Return all the edges in a graph. */
     Set<Edge> getEdgeSet();
+
+    /** Return all vertices and the number of incoming and outgoing edges. */
+    Map<String, int[]> getDegrees();
 
     /** Return true if the graph is directed.  */
     boolean isDirected();
