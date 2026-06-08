@@ -13,6 +13,7 @@ import java.util.Objects;
  *    the University's Academic Integrity Policy.
  **/
 public class Edge {
+
     // Attributes
     private final Vertex source;
     private final Vertex destination;
@@ -33,24 +34,24 @@ public class Edge {
 
     // Accessor methods
 
-    /** Return the source vertex of an edge. */
+    /** Returns the source vertex of an edge. */
     public Vertex getSource() {
         return source;
     }
 
-    /** Return the destination vertex of an edge. */
+    /** Returns the destination vertex of an edge. */
     public Vertex getDestination() {
         return destination;
     }
 
-    /** Return the weight of an edge. */
+    /** Returns the weight of an edge. */
     public double getWeight() {
         return weight;
     }
 
-    // Modifiers
+    // Modifier methods
 
-    /** Set the weight of an edge. */
+    /** Sets the weight of an edge. */
     public void setWeight(double weight) {
         this.weight = weight;
     }
@@ -82,18 +83,13 @@ public class Edge {
         return source.equals(other.source) && destination.equals(other.destination);
     }
 
-    /**
-     * Returns an edge's hashcode value based on Vertex endpoints.
-     */
+    /** Returns an edge's hashcode value based on Vertex endpoints. */
     @Override
     public int hashCode() {
         return Objects.hash(source, destination);
     }
 
-    /**
-     * Returns a String representation of this Edge object.
-     * @return formatted String containing source and destination vertices, and edge weight
-     */
+    /** Returns a String representation of this Edge object including Vertex endpoints and edge weight. */
     @Override
     public String toString() {
         return "Edge: " + source + " -> " + destination + " (" + weight + ")";
