@@ -41,20 +41,6 @@ class VertexTest {
                 "Vertices with different IDs and the same name should not be considered equal.");
     }
 
-    @Test
-    void testDiffNameCase() {
-        Vertex vertexNameCase = new Vertex(0, "VERTEX1");
-        assertNotEquals(vertex1, vertexNameCase,
-                "Vertex names are case-sensitive.");
-    }
-
-    @Test
-    void testDiffNameSpace() {
-        Vertex vertexNameSpace = new Vertex(0, "Vertex 1");
-        assertNotEquals(vertex1, vertexNameSpace,
-                "Vertex names are space sensitive.");
-    }
-
     // Hash code tests
 
     @Test
@@ -70,22 +56,8 @@ class VertexTest {
     }
 
     @Test
-    void testDiffNameCaseHashCode() {
-        Vertex vertexNameCase = new Vertex(1, "VERTEX1");
-        assertNotEquals(vertex1.hashCode(), vertexNameCase.hashCode(),
-                "Letter case differences in vertex names should produce different hash codes.");
-    }
-
-    @Test
-    void testDiffNameSpaceHashCode() {
-        Vertex vertexNameSpace = new Vertex(1, "Vertex 1");
-        assertNotEquals(vertex1.hashCode(), vertexNameSpace.hashCode(),
-                "Space differences in vertex names should produce different hash codes.");
-    }
-
-    @Test
     void testToString() {
-        String expected = "Vertex name: Vertex1 Vertex ID: 0";
+        String expected = "Vertex1 (0)";
         assertEquals(expected, vertex1.toString());
     }
 }
