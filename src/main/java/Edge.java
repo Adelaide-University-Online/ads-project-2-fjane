@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 /**
  * File: Edge.java
  * Description: This class represents an edge between two vertices in a graph. An edge can be weighted and assigned
@@ -15,33 +13,33 @@ import java.util.Objects;
 public class Edge {
 
     // Attributes
-    private final Vertex source;
-    private final Vertex destination;
+    private final int sourceId;
+    private final int destinationId;
     private double weight;
 
     // Constructors
-    public Edge(Vertex source, Vertex destination, double weight) {
-        this.source = source;
-        this.destination = destination;
+    public Edge(int sourceId, int destinationId, double weight) {
+        this.sourceId = sourceId;
+        this.destinationId = destinationId;
         this.weight = weight;
     }
 
-    public Edge(Vertex source, Vertex destination) {
-        this.source = source;
-        this.destination = destination;
+    public Edge(int sourceId, int destinationId) {
+        this.sourceId = sourceId;
+        this.destinationId = destinationId;
         this.weight = 1.0;
     }
 
     // Accessor methods
 
     /** Returns the source vertex of an edge. */
-    public Vertex getSource() {
-        return source;
+    public int getSource() {
+        return sourceId;
     }
 
     /** Returns the destination vertex of an edge. */
-    public Vertex getDestination() {
-        return destination;
+    public int getDestination() {
+        return destinationId;
     }
 
     /** Returns the weight of an edge. */
@@ -58,40 +56,9 @@ public class Edge {
 
     // Other methods
 
-    /**
-     * Compares an object with this.instance.
-     * @param obj   The reference object to be compared
-     * @return true if the comparison Edge object has the same source and destination vertices
-     */
-    @Override
-    public boolean equals(Object obj) {
-        // Check self comparison
-        if (this == obj) return true;
-
-        // Check if obj is null
-        if(obj == null){
-            return false;
-        }
-
-        // Check if objects are different classes
-        if (!(obj instanceof Edge)) return false;
-
-        // Cast object
-        Edge other = (Edge) obj;
-
-        // Compare source and destination vertices of the edges
-        return source.equals(other.source) && destination.equals(other.destination);
-    }
-
-    /** Returns an edge's hashcode value based on Vertex endpoints. */
-    @Override
-    public int hashCode() {
-        return Objects.hash(source, destination);
-    }
-
     /** Returns a String representation of this Edge object including Vertex endpoints and edge weight. */
     @Override
     public String toString() {
-        return "Edge: " + source + " -> " + destination + " (" + weight + ")";
+        return "Edge: " + sourceId + " -> " + destinationId + " (" + weight + ")";
     }
 }
