@@ -82,4 +82,10 @@ class VertexTest {
         assertNotEquals(vertex1.hashCode(), vertexNameSpace.hashCode(),
                 "Space differences in vertex names should produce different hash codes.");
     }
+
+    @Test
+    void testToString() {
+        String expected = "Vertex name: Vertex1 Vertex ID: 0";
+        assertEquals(expected, vertex1.toString());
+    }
 }
