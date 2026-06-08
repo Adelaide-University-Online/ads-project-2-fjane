@@ -26,4 +26,32 @@ class VertexTest {
     void testGetName() {
         assertEquals("Vertex1", vertex1.getName());
     }
+
+    // Equality tests
+
+    @Test
+    void testCopyEquals() {
+        assertEquals(vertex1, vertexCopy,
+                "Vertices with the same ID and name should be considered equal.");
+    }
+
+    @Test
+    void testDiffID() {
+        assertNotEquals(vertex1, vertexDiffID,
+                "Vertices with different IDs and the same name should not be considered equal.");
+    }
+
+    @Test
+    void testDiffNameCase() {
+        Vertex vertexNameCase = new Vertex(0, "VERTEX1");
+        assertNotEquals(vertex1, vertexNameCase,
+                "Vertex names are case-sensitive.");
+    }
+
+    @Test
+    void testDiffNameSpace() {
+        Vertex vertexNameSpace = new Vertex(0, "Vertex 1");
+        assertNotEquals(vertex1, vertexNameSpace,
+                "Vertex names are space sensitive.");
+    }
 }
