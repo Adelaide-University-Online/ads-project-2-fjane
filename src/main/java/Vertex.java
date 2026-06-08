@@ -61,4 +61,8 @@ public class Vertex {
     public int hashCode() {
         return Objects.hash(id, name);
     }
+
+    public String toString() {
+        return "Vertex name: " + name + " Vertex ID: " + id;
+    }
 }
