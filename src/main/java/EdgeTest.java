@@ -5,10 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EdgeTest {
 
-    protected Vertex vertex1;
-    protected Vertex vertex2;
-    protected Vertex vertex3;
-
     protected Edge edge1;
     protected Edge edge1Copy;
     protected Edge edgeDiffSource;
@@ -17,27 +13,23 @@ class EdgeTest {
 
     @BeforeEach
     void setUp() {
-        vertex1 = new Vertex(0, "AAAA1234");
-        vertex2 = new Vertex(0, "BBBB4567");
-        vertex3 = new Vertex(1, "CCCC8910");
-
-        edge1 = new Edge(vertex1, vertex2, 2.0);
-        edge1Copy = new Edge(vertex1, vertex2, 2.0);
-        edgeDiffSource = new Edge(vertex3, vertex2, 2.0);
-        edgeDiffDest = new Edge(vertex1, vertex3, 2.0);
-        edge2 = new Edge(vertex1, vertex2);
+        edge1 = new Edge(0, 1, 2.0);
+        edge1Copy = new Edge(0, 1, 2.0);
+        edgeDiffSource = new Edge(2, 1, 2.0);
+        edgeDiffDest = new Edge(0, 2, 2.0);
+        edge2 = new Edge(0, 1);
     }
 
     // Accessor method tests
 
     @Test
     void testGetSource() {
-        assertEquals(vertex1, edge1.getSource());
+        assertEquals(0, edge1.getSource());
     }
 
     @Test
     void testGetDestination() {
-        assertEquals(vertex2, edge1.getDestination());
+        assertEquals(1, edge1.getDestination());
     }
 
     @Test
