@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * File: Edge.java
  * Description: This class represents an edge between two vertices in a graph. An edge can be weighted and assigned
@@ -29,7 +31,7 @@ public class Edge {
         this.weight = 1.0;
     }
 
-    // Accessors
+    // Accessor methods
 
     /** Return the source vertex of an edge. */
     public Vertex getSource() {
@@ -81,12 +83,11 @@ public class Edge {
     }
 
     /**
-     * Generates an edge's hashcode value based on Vertex endpoints.
-     * @return a hashcode value
+     * Returns an edge's hashcode value based on Vertex endpoints.
      */
     @Override
     public int hashCode() {
-        return 31 * source.hashCode() * destination.hashCode();
+        return Objects.hash(source, destination);
     }
 
     /**
