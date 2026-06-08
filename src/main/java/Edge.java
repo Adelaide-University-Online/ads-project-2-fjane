@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * File: Edge.java
  * Description: This class represents an edge between two vertices in a graph. An edge can be weighted and assigned
@@ -55,6 +57,37 @@ public class Edge {
     }
 
     // Other methods
+
+    /**
+     * Compares an object with this.instance.
+     * @param obj   The reference object to be compared
+     * @return true if the comparison Edge object has the same sourceId and destinationId
+     */
+    @Override
+    public boolean equals(Object obj) {
+        // Check self comparison
+        if (this == obj) return true;
+
+        // Check if obj is null
+        if(obj == null){
+            return false;
+        }
+
+        // Check if objects are different classes
+        if (!(obj instanceof Edge)) return false;
+
+        // Cast object
+        Edge other = (Edge) obj;
+
+        // Compare source and destination vertices of the edges
+        return sourceId == other.sourceId && destinationId == other.destinationId;
+    }
+
+    /** Returns an edge's hashcode value based on endpoints. */
+    @Override
+    public int hashCode() {
+        return Objects.hash(sourceId, destinationId);
+    }
 
     /** Returns a String representation of this Edge object including Vertex endpoints and edge weight. */
     @Override
