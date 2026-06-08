@@ -5,7 +5,6 @@ import java.util.Set;
 /**
  * File: Graph.java
  * Description: This interface includes operations used to construct, manipulate, and traverse a graph data structure.
- * This interface is currently set up to be used with String vertices and Edge class objects.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
  * Email ID: florence.sayavongsa@student.adelaide.edu.au
@@ -22,16 +21,16 @@ public interface Graph {
     int numEdges();
 
     /** Return all the vertices in a graph. */
-    Set<String> getVertices();
+    Set<Vertex> getVertices();
 
     /** Return all the edges in a graph. */
     Set<Edge> getEdgeSet();
 
     /** Return all vertices with number of incoming edges. */
-    Map<String, Integer> getInDegrees();
+    Map<Vertex, Integer> getInDegrees();
 
     /** Return all vertices with number of outgoing edges. */
-    Map<String, Integer> getOutDegrees();
+    Map<Vertex, Integer> getOutDegrees();
 
     /** Return true if the graph is directed.  */
     boolean isDirected();
