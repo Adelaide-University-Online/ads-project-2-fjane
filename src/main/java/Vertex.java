@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * File: Vertex.java
  * Description: This class represents a single vertex in a graph.
@@ -29,5 +31,34 @@ public class Vertex {
     /** Return the name of a vertex. */
     public String getName() {
         return name;
+    }
+
+    // Other methods
+    @Override
+    public boolean equals(Object obj){
+        // Check if objects are the same item
+        if(this == obj){
+            return true;
+        }
+
+        // Check if obj is null
+        if(obj == null){
+            return false;
+        }
+
+        // Check if objects are different classes
+        if(!(getClass() == obj.getClass())){
+            return false;
+        }
+
+        // Cast object
+        Vertex other = (Vertex) obj;
+
+        return this.id == other.id && this.name.equals(other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }
