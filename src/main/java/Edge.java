@@ -2,7 +2,7 @@
  * File: Edge.java
  * Description: This class represents an edge between two vertices in a graph. An edge can be weighted and assigned
  * values to represent significance such as distance, cost or time. Otherwise, unweighted edges in a graph share
- * the same level of significance. Vertices are of String type.
+ * the same level of significance.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
  * Email ID: florence.sayavongsa@student.adelaide.edu.au
@@ -12,18 +12,18 @@
  **/
 public class Edge {
     // Attributes
-    private final String source;
-    private final String destination;
+    private final Vertex source;
+    private final Vertex destination;
     private double weight;
 
     // Constructors
-    public Edge(String source, String destination, double weight) {
+    public Edge(Vertex source, Vertex destination, double weight) {
         this.source = source;
         this.destination = destination;
         this.weight = weight;
     }
 
-    public Edge(String source, String destination) {
+    public Edge(Vertex source, Vertex destination) {
         this.source = source;
         this.destination = destination;
         this.weight = 1.0;
@@ -32,12 +32,12 @@ public class Edge {
     // Accessors
 
     /** Return the source vertex of an edge. */
-    public String getSource() {
+    public Vertex getSource() {
         return source;
     }
 
     /** Return the destination vertex of an edge. */
-    public String getDestination() {
+    public Vertex getDestination() {
         return destination;
     }
 
@@ -95,6 +95,6 @@ public class Edge {
      */
     @Override
     public String toString() {
-        return source + " -> " + destination + " (" + weight + ") ";
+        return "Edge: " + source + " -> " + destination + " (" + weight + ")";
     }
 }
