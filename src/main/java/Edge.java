@@ -58,7 +58,7 @@ public class Edge {
     /**
      * Compares an object with this.instance.
      * @param obj   The reference object to be compared
-     * @return true if the comparison Edge object has the same source and destination vertices, and edge weight
+     * @return true if the comparison Edge object has the same source and destination vertices
      */
     @Override
     public boolean equals(Object obj) {
@@ -77,16 +77,16 @@ public class Edge {
         Edge other = (Edge) obj;
 
         // Compare source and destination vertices of the edges
-        return source.equals(other.source) && destination.equals(other.destination) && weight == other.weight;
+        return source.equals(other.source) && destination.equals(other.destination);
     }
 
     /**
-     * Generates an edge's hashcode value based on source and destination vertices, and edge weight.
+     * Generates an edge's hashcode value based on Vertex endpoints.
      * @return a hashcode value
      */
     @Override
     public int hashCode() {
-        return 31 * source.hashCode() * destination.hashCode() * Double.hashCode(weight);
+        return 31 * source.hashCode() * destination.hashCode();
     }
 
     /**
