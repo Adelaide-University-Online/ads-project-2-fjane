@@ -1,6 +1,6 @@
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * File: Graph.java
@@ -21,16 +21,16 @@ public interface Graph {
     int numEdges();
 
     /** Return all the vertices in a graph. */
-    Set<Vertex> getVertices();
+    Map<Integer, Vertex> getVertices();
 
     /** Return all the edges in a graph. */
-    Set<Edge> getEdgeSet();
+    Map<Integer, List<Edge>> getEdges();
 
     /** Return all vertices with number of incoming edges. */
-    Map<Vertex, Integer> getInDegrees();
+    Map<Integer, Integer> getInDegrees();
 
     /** Return all vertices with number of outgoing edges. */
-    Map<Vertex, Integer> getOutDegrees();
+    Map<Integer, Integer> getOutDegrees();
 
     /** Return true if the graph is directed.  */
     boolean isDirected();
