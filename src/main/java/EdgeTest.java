@@ -5,33 +5,39 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EdgeTest {
 
+    protected Vertex vertex1;
+    protected Vertex vertex2;
+    protected Vertex vertex3;
+
     protected Edge edge1;
     protected Edge edge1Copy;
-    protected Edge edgeDiffWeight;
     protected Edge edgeDiffSource;
     protected Edge edgeDiffDest;
     protected Edge edge2;
 
     @BeforeEach
     void setUp() {
-        edge1 = new Edge("AAAA1234", "BBBB1234", 2.0);
-        edge1Copy = new Edge("AAAA1234", "BBBB1234", 2.0);
-        edgeDiffWeight = new Edge("AAAA1234", "BBBB1234", 3.0);
-        edgeDiffSource = new Edge("aaaa1234", "BBBB1234", 2.0);
-        edgeDiffDest = new Edge("AAAA1234", "B1234", 2.0);
-        edge2 = new Edge("AAAA1234", "BBBB1234");
+        vertex1 = new Vertex(0, "AAAA1234");
+        vertex2 = new Vertex(0, "BBBB4567");
+        vertex3 = new Vertex(1, "CCCC8910");
+
+        edge1 = new Edge(vertex1, vertex2, 2.0);
+        edge1Copy = new Edge(vertex1, vertex2, 2.0);
+        edgeDiffSource = new Edge(vertex3, vertex2, 2.0);
+        edgeDiffDest = new Edge(vertex1, vertex3, 2.0);
+        edge2 = new Edge(vertex1, vertex2);
     }
 
     // Accessor method tests
 
     @Test
     void testGetSource() {
-        assertEquals("AAAA1234", edge1.getSource());
+        assertEquals(vertex1, edge1.getSource());
     }
 
     @Test
     void testGetDestination() {
-        assertEquals("BBBB1234", edge1.getDestination());
+        assertEquals(vertex2, edge1.getDestination());
     }
 
     @Test
@@ -57,22 +63,20 @@ class EdgeTest {
 
     @Test
     void testSameAttributesEqual() {
-        assertEquals(edge1, edge1Copy, "Edges with the same source and destination vertices and weight should be considered equal.");
+        assertEquals(edge1, edge1Copy,
+                "Edges with the same source and destination vertices should be considered equal.");
     }
 
     @Test
     void testDiffSourceNotEqual() {
-        assertNotEquals(edgeDiffSource, edge1, "Edges with different source vertices but the same destination vertex and weight are not equal.");
+        assertNotEquals(edgeDiffSource, edge1,
+                "Edges with different source vertices but the same destination vertex are not equal.");
     }
 
     @Test
     void testDiffDestinationNotEqual() {
-        assertNotEquals(edgeDiffDest, edge1, "Edges with different destination vertices but the same source vertex and weight are not equal.");
-    }
-
-    @Test
-    void testDiffWeightNotEqual() {
-        assertNotEquals(edgeDiffWeight, edge1, "Edges with different weights but the same source and destination vertices should be considered equal.");
+        assertNotEquals(edgeDiffDest, edge1,
+                "Edges with different destination vertices but the same source vertex are not equal.");
     }
 
     // Hash code tests
@@ -80,24 +84,18 @@ class EdgeTest {
     @Test
     void testSameAttributesHashCode() {
         assertEquals(edge1.hashCode(), edge1Copy.hashCode(),
-                "Edges with the same source and destination vertices and weight should produce the same hash code.");
+                "Edges with the same source and destination vertices should produce the same hash code.");
     }
 
     @Test
     void testDiffSourceHashCode() {
         assertNotEquals(edgeDiffSource.hashCode(), edge1.hashCode(),
-                "Edges with different source vertices but the same destination vertex and weight should produce different hash codes.");
+                "Edges with different source vertices but the same destination vertex should produce different hash codes.");
     }
 
     @Test
     void testDiffDestinationHashCode() {
         assertNotEquals(edgeDiffDest.hashCode(), edge1.hashCode(),
-                "Edges with different destination vertices but the same source vertex and weight should produce different hash codes.");
-    }
-
-    @Test
-    void testDiffWeightHashCode() {
-        assertNotEquals(edgeDiffWeight.hashCode(), edge1.hashCode(),
-                "Edges with different weights but the same source and destination vertices should produce different hash codes.");
+                "Edges with different destination vertices but the same source vertex should produce different hash codes.");
     }
 }
