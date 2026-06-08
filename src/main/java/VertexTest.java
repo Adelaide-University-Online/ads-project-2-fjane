@@ -54,4 +54,32 @@ class VertexTest {
         assertNotEquals(vertex1, vertexNameSpace,
                 "Vertex names are space sensitive.");
     }
+
+    // Hash code tests
+
+    @Test
+    void testCopyHashCode() {
+        assertEquals(vertex1.hashCode(), vertexCopy.hashCode(),
+                "Vertices with the same ID and name should produce the same hash code.");
+    }
+
+    @Test
+    void testDiffIdHashCode() {
+        assertNotEquals(vertex1.hashCode(), vertexDiffID.hashCode(),
+                "Vertices with different IDs and the same name should produce different hash codes.");
+    }
+
+    @Test
+    void testDiffNameCaseHashCode() {
+        Vertex vertexNameCase = new Vertex(1, "VERTEX1");
+        assertNotEquals(vertex1.hashCode(), vertexNameCase.hashCode(),
+                "Letter case differences in vertex names should produce different hash codes.");
+    }
+
+    @Test
+    void testDiffNameSpaceHashCode() {
+        Vertex vertexNameSpace = new Vertex(1, "Vertex 1");
+        assertNotEquals(vertex1.hashCode(), vertexNameSpace.hashCode(),
+                "Space differences in vertex names should produce different hash codes.");
+    }
 }
