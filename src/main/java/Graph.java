@@ -38,7 +38,10 @@ public interface Graph {
     /** Return true if the graph is weighted. */
     boolean isWeighted();
 
-    /** Add a new Edge into the graph. */
+    /** Add a new Vertex to the graph. */
+    void addVertex(int id, String name);
+
+    /** Add a new Edge to the graph. */
     void addEdge(int sourceId, int destinationId);
 
     /** Return an iterator to the outgoing edges of a vertex.
