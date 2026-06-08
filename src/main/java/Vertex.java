@@ -19,4 +19,15 @@ public class Vertex {
         this.id = id;
         this.name = name;
     }
+
+    // Accessor methods
+    /** Return the ID of a vertex. */
+    public int getID() {
+        return id;
+    }
+
+    /** Return the name of a vertex. */
+    public String getName() {
+        return name;
+    }
 }
