@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 /**
  * File: Vertex.java
  * Description: This class represents a single vertex in a graph.
@@ -13,7 +11,7 @@ import java.util.Objects;
 public class Vertex {
 
     // Attributes
-    private int id;
+    private final int id;
     private String name;
 
     // Constructor
@@ -54,15 +52,15 @@ public class Vertex {
         // Cast object
         Vertex other = (Vertex) obj;
 
-        return this.id == other.id && this.name.equals(other.name);
+        return this.id == other.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Integer.hashCode(id);
     }
 
     public String toString() {
-        return "Vertex name: " + name + " Vertex ID: " + id;
+        return name + " (" + id + ")";
     }
 }
