@@ -39,7 +39,7 @@ public interface Graph {
     boolean isWeighted();
 
     /** Add a new Edge into the graph. */
-    void insert(Edge edge);
+    void addEdge(int sourceId, int destinationId);
 
     /** Return an iterator to the outgoing edges of a vertex.
      * @param source The source vertex
