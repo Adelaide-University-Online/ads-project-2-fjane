@@ -21,6 +21,7 @@ public class Vertex {
     }
 
     // Accessor methods
+
     /** Return the ID of a vertex. */
     public int getID() {
         return id;
@@ -29,6 +30,12 @@ public class Vertex {
     /** Return the name of a vertex. */
     public String getName() {
         return name;
+    }
+
+    // Modifier method
+    /** Update the name of a vertex. */
+    public void setName(String name) {
+        this.name = name;
     }
 
     // Other methods
