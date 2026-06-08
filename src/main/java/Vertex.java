@@ -22,23 +22,30 @@ public class Vertex {
 
     // Accessor methods
 
-    /** Return the ID of a vertex. */
+    /** Returns the ID of a vertex. */
     public int getID() {
         return id;
     }
 
-    /** Return the name of a vertex. */
+    /** Returns the name of a vertex. */
     public String getName() {
         return name;
     }
 
     // Modifier method
-    /** Update the name of a vertex. */
+
+    /** Updates the name of a vertex. */
     public void setName(String name) {
         this.name = name;
     }
 
     // Other methods
+
+    /**
+     * Compares an object with this.instance.
+     * @param obj   The reference object to be compared
+     * @return true if the comparison Vertex object has the same id
+     */
     @Override
     public boolean equals(Object obj){
         // Check if objects are the same item
@@ -62,11 +69,13 @@ public class Vertex {
         return this.id == other.id;
     }
 
+    /** Returns a hash code value for this Vertex object based on ID. */
     @Override
     public int hashCode() {
         return Integer.hashCode(id);
     }
 
+    /** Returns a String representation of this Vertex object including name and ID. */
     public String toString() {
         return name + " (" + id + ")";
     }
