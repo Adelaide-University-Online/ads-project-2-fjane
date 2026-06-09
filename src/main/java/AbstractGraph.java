@@ -118,6 +118,47 @@ public abstract class AbstractGraph implements Graph{
         }
     }
 
+    // Other methods
+
+    /**
+     * Creates graph's vertices and edges by parsing data from a text file.
+     * The first line of the file must be a list of vertex labels separated by a comma.
+     * Following lines outline a vertex and its dependent separated by a comma.
+     * Any line in the text file that contains multiple elements is an indication of an edge where destination vertices
+     * are listed to the left of their dependent vertex.
+     * @param scan Scanner to read in text file
+     */
+    public void loadVertexEdgesFromFile(Scanner scan)  {
+
+        // Read in first line. Splice and save each vertex label to a list
+        String[] labels = scan.nextLine().trim().split(",\\s*");
+
+        // Add each vertex to graph
+        for(int i = 0; i < labels.length; i++) {
+            addVertex(i, labels[i]);
+        }
+
+        // Loop through the remaining lines of the text file
+        while (scan.hasNextLine()) {
+
+            // Process one line at a time
+            String line = scan.nextLine().trim();
+            if (line.isEmpty()) continue;
+
+            // Splice line by comma and white spaces
+            String[] parts = line.split(",\\s*");
+
+            // For each vertex pair, add a new edge to the edge map.
+            for (int i = 0; i < parts.length-1; i++) {
+                // Use the vertices reverse lookup map to get the Vertex's ID
+                int destinationId = nameToId.get(parts[i]);
+                int sourceId = nameToId.get(parts[i + 1]);
+
+                addEdge(sourceId, destinationId);
+            }
+        }
+    }
+
     /* Class template inspired by:
     Koffman, E.B., & Wolfgang, P.A.T. (2015). Data Structures: Abstraction and Design Using Java: Chapter 10 Graphs.
     (3rd ed.). Wiley. http://ebookcentral.proquest.com/lib/adelaideuni/detail.action?docID=5106355
