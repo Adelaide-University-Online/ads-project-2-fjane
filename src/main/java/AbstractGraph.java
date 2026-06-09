@@ -19,30 +19,21 @@ import java.util.*;
 public abstract class AbstractGraph implements Graph{
 
     // Attributes
-    protected Map<Integer, Vertex> vertices;
-    protected Map<Integer, List<Edge>> edges;
-    protected Map<String, Integer> nameToId; // Reverse look up map for vertices
     protected boolean directed;
     protected boolean weighted;
-    protected Map<Integer, int[]> degrees; // Vertex: [0] in-degree, [1] out-degree
 
     // Constructors
-    public AbstractGraph(Map<Integer, Vertex> vertices, Map<Integer, List<Edge>> edges, boolean directed, boolean weighted) {
-        this.vertices = vertices;
-        this.edges = edges;
+    public AbstractGraph(boolean directed, boolean weighted) {
         this.directed = directed;
         this.weighted = weighted;
     }
 
-    public AbstractGraph(Map<Integer, Vertex> vertices, Map<Integer, List<Edge>> edges, boolean directed) {
-        this.vertices = vertices;
-        this.edges = edges;
+    public AbstractGraph(boolean directed) {
         this.directed = directed;
         this.weighted = false;
     }
 
     public AbstractGraph() {
-        this.degrees = new HashMap<>();
     }
 
     // Accessor methods
@@ -55,67 +46,6 @@ public abstract class AbstractGraph implements Graph{
     /** Return whether graph is weighted. */
     public boolean isWeighted() {
         return weighted;
-    }
-
-    /** Return the number of vertices. */
-    public int numVertices() {
-        return vertices.size();
-    }
-
-    /** Return the number of edges. */
-    public int numEdges() {
-        return edges.size();
-    }
-
-    /** Return all the vertices in a graph. */
-    public Map<Integer, Vertex> getVertices(){
-        return vertices;
-    }
-
-    /** Return all the edges in a graph. */
-    public Map<Integer, List<Edge>> getEdges(){
-        return edges;
-    }
-
-    // Modifier methods
-
-    /**
-     * Creates a new Vertex, adds it to the graph's vertices map and the vertices reverse lookup map.
-     * @param id an integer id
-     * @param name a String name
-     */
-    public void addVertex(int id, String name) {
-        // Adds a new Vertex to the vertices map
-        vertices.put(id, new Vertex(id, name));
-
-        // Adds the new Vertex to the vertices reverse look up map
-        nameToId.put(name, id);
-    }
-
-    /**
-     * Creates a new Edge, adds it to the graph's edges map. Verifies that the proposed Edge's endpoints exist in the
-     * graph's vertices map first.
-     * @param sourceId an integer id of a Vertex
-     * @param destinationId an integer id of a Vertex
-     */
-    public void addEdge(int sourceId, int destinationId) {
-        // Checks if the source Vertex exists in the vertice map
-        if(!vertices.containsKey(sourceId)) {
-            throw new NoSuchElementException("Edge source vertex was not found in vertex list.");
-        }
-
-        // Checks if the destination Vertex exists in the vertice map
-        if(!vertices.containsKey(destinationId)) {
-            throw new NoSuchElementException("Edge destination vertex was not found in vertex list.");
-        }
-
-        // Adds new Edge to the edges map
-        edges.computeIfAbsent(sourceId, _ -> new ArrayList<>()).add(new Edge(sourceId, destinationId));
-
-        // Adds new Edge to the edges map in the opposite direction for undirected graphs
-        if(!directed) {
-            edges.computeIfAbsent(destinationId, _ -> new ArrayList<>()).add(new Edge(destinationId, sourceId));
-        }
     }
 
     // Other methods
@@ -151,8 +81,8 @@ public abstract class AbstractGraph implements Graph{
             // For each vertex pair, add a new edge to the edge map.
             for (int i = 0; i < parts.length-1; i++) {
                 // Use the vertices reverse lookup map to get the Vertex's ID
-                int destinationId = nameToId.get(parts[i]);
-                int sourceId = nameToId.get(parts[i + 1]);
+                int destinationId = getVertixId(parts[i]);
+                int sourceId = getVertixId(parts[i + 1]);
 
                 addEdge(sourceId, destinationId);
             }
