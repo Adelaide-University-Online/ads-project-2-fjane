@@ -32,6 +32,9 @@ public interface Graph {
     /** Return all vertices with number of outgoing edges. */
     Map<Integer, Integer> getOutDegrees();
 
+    /** Return a vertex ID by searching for vertex name. */
+    int getVertixId(String name);
+
     /** Return true if the graph is directed.  */
     boolean isDirected();
 
