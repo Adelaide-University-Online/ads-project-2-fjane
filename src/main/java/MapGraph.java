@@ -18,8 +18,8 @@ public class MapGraph {
     protected Map<Integer, Vertex> vertices;
     protected Map<Integer, List<Edge>> edges; // Adjacency list
     protected Map<String, Integer> nameToId; // Reverse look up map for vertices
-    protected Map<Integer, Integer> inDegree; //
-    protected Map<Integer, Integer> outDegree; //
+    protected Map<Integer, Integer> inDegree;
+    protected Map<Integer, Integer> outDegree;
     protected boolean directed;
     protected boolean weighted;
 
@@ -29,4 +29,45 @@ public class MapGraph {
         this.weighted = weighted;
     }
 
+    // Accessor methods
+
+    /** Return whether graph is directed. */
+    public boolean isDirected() {
+        return directed;
+    }
+
+    /** Return whether graph is weighted. */
+    public boolean isWeighted() {
+        return weighted;
+    }
+
+    /** Return the number of vertices. */
+    public int numVertices() {
+        return vertices.size();
+    }
+
+    /** Return the number of edges. */
+    public int numEdges() {
+        return edges.size();
+    }
+
+    /** Return all the vertices in a graph. */
+    public Map<Integer, Vertex> getVertices(){
+        return vertices;
+    }
+
+    /** Return all the edges in a graph. */
+    public Map<Integer, List<Edge>> getEdges(){
+        return edges;
+    }
+
+    /** Return all vertices with number of incoming edges. */
+    public Map<Integer, Integer> getInDegrees() {
+        return inDegree;
+    }
+
+    /** Return all vertices with number of outgoing edges. */
+    public Map<Integer, Integer> getOutDegrees() {
+        return outDegree;
+    }
 }
