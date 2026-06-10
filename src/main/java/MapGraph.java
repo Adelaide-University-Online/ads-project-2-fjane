@@ -153,7 +153,7 @@ public class MapGraph {
      * @param sourceId an integer id of a Vertex
      * @param destinationId an integer id of a Vertex
      */
-    public void addEdge(int sourceId, int destinationId) {
+    public boolean addEdge(int sourceId, int destinationId) {
         // Checks if source vertex exists in the vertices map
         if(!isVertex(sourceId)) {
             throw new IllegalArgumentException("Edge source endpoint does not exist.");
@@ -166,7 +166,7 @@ public class MapGraph {
 
         // Check if Edge already exists in edges map, if so return to avoid duplication
         if(isEdge(sourceId, destinationId)) {
-            return;
+            return false;
         }
 
         // Adds new Edge to edges map
@@ -186,6 +186,8 @@ public class MapGraph {
             outDegree.put(destinationId, outDegree.get(destinationId) + 1);
             numEdges += 1;
         }
+
+        return true;
     }
 
     // Other methods
