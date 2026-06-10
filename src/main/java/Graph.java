@@ -33,7 +33,7 @@ public interface Graph {
     Map<Integer, Integer> getOutDegrees();
 
     /** Return a vertex ID by searching for vertex name. */
-    int getVertexId(String name);
+    int getVertexIdByName(String name);
 
     /** Return true if the graph is directed.  */
     boolean isDirected();
