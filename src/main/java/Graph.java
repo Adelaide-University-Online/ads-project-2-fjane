@@ -54,7 +54,7 @@ public interface Graph {
     boolean isEdge(int sourceId, int destinationId);
 
     /** Return an iterator to the outgoing edges of a vertex. */
-    Iterator<Edge> edgeIterator(String source);
+    Iterator<Edge> edgeIterator(int sourceId);
 
     /* Code inspired by:
     Koffman, E.B., & Wolfgang, P.A.T. (2015). Data Structures: Abstraction and Design Using Java: Chapter 10 Graphs.
