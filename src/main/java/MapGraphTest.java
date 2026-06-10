@@ -69,4 +69,18 @@ class MapGraphTest {
                         mapDirectedWeighted.addVertex(10, "B"),
                 "Exception should be thrown when attempting to add a new vertex that has an existing name.");
     }
+
+    // Edge tests
+
+    @Test
+    void testEdgeCount() {
+        assertEquals(1, mapDirectedWeighted.getNumEdges());
+    }
+
+    @Test
+    void testDuplicateEdges() {
+        mapDirectedWeighted.addEdge(0,1);
+        assertEquals(1, mapDirectedWeighted.getNumEdges(),
+                "Duplicate edges are not allowed.");
+    }
 }
