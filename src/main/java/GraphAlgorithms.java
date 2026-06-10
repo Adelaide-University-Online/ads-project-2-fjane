@@ -2,7 +2,7 @@ import java.util.*;
 
 /**
  * File: GraphAlgorithms.java
- * Description: This class is intended to be a collection of algorithms that can be applied to directed graphs.
+ * Description: This class is a collection of algorithms that can be applied to directed graphs.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
  * Email ID: florence.sayavongsa@student.adelaide.edu.au
@@ -18,25 +18,25 @@ public class GraphAlgorithms {
      * @return List of sorted vertices
      * @throws IllegalStateException if a cycle is detected
      */
-    public static List<String> kahnsTopological(AbstractGraph graph) {
+    public static List<Integer> kahnsTopological(MapGraph graph) {
 
         // Create a new map to hold vertex in-degree information (to prevent mutating graph state)
-        Map<String, Integer> inDegree = graph.getInDegrees();
+        Map<Integer, Integer> inDegree = graph.getInDegrees();
 
         // Create a queue and add vertices with 0 in-degree
-        Queue<String> noIncoming = new ArrayDeque<>();
-        for (Map.Entry<String, Integer> entry : inDegree.entrySet()) {
+        Queue<Integer> noIncoming = new ArrayDeque<>();
+        for (Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
             if (entry.getValue() == 0) noIncoming.add(entry.getKey());
         }
 
         // Create a list to store topological sort result
-        List<String> topoResult = new ArrayList<>();
+        List<Integer> topoResult = new ArrayList<>();
 
         // Process vertices in queue
         while (!noIncoming.isEmpty()) {
 
             // Remove first vertex in sort queue and add to result list
-            String current = noIncoming.poll();
+            int current = noIncoming.poll();
             topoResult.add(current);
 
             // Iterate through other vertices that are connected to the current vertex
@@ -47,7 +47,7 @@ public class GraphAlgorithms {
                 Edge edge = edgeIterator.next();
 
                 // Get neighbour of current vertex
-                String neighbour = edge.getDestination();
+                int neighbour = edge.getDestination();
 
                 // Decrement in-degree as 'current' vertex (source vertex) has now been processed
                 inDegree.put(neighbour, inDegree.get(neighbour) - 1);
