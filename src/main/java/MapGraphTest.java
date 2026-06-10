@@ -70,6 +70,11 @@ class MapGraphTest {
                 "Exception should be thrown when attempting to add a new vertex that has an existing name.");
     }
 
+    @Test
+    void testVertexIdByName() {
+        assertEquals(0, mapDirectedWeighted.getVertexIdByName("A"));
+    }
+
     // Edge tests
 
     @Test
