@@ -48,7 +48,7 @@ public interface Graph {
     boolean addEdge(int sourceId, int destinationId);
 
     /** Checks if a Vertex exists in a graph. */
-    boolean isVertex(int id, String name);
+    boolean isVertex(int id);
 
     /** Checks if an Edge exists in a graph. */
     boolean isEdge(int sourceId, int destinationId);
