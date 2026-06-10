@@ -15,13 +15,13 @@ import java.util.*;
 public class MapGraph {
 
     // Attributes
-    private final Map<Integer, Vertex> vertices;
-    private final Map<Integer, List<Edge>> edges; // Adjacency list
-    private final Map<String, Integer> nameToId; // Reverse look up map for vertices
-    private final Map<Integer, Integer> inDegree;
-    private final Map<Integer, Integer> outDegree;
-    private final boolean directed;
-    private final boolean weighted;
+    private Map<Integer, Vertex> vertices;
+    private Map<Integer, List<Edge>> edges; // Adjacency list
+    private Map<String, Integer> nameToId; // Reverse look up map for vertices
+    private Map<Integer, Integer> inDegree;
+    private Map<Integer, Integer> outDegree;
+    private boolean directed;
+    private boolean weighted;
     private int numVertices;
     private int numEdges;
 
@@ -102,6 +102,21 @@ public class MapGraph {
         return outDegree;
     }
 
+    /**
+     * Returns a Vertex's ID (or null) by searching the verticse reverse loop map name.
+     * @param name Vertex String name
+     */
+    public int getVertexId(String name) {
+        Integer id = nameToId.get(name);
+
+        // Null check
+        if (id == null) {
+            throw new IllegalArgumentException("Unknown vertex name: " + name);
+        }
+
+        return id;
+    }
+
     // Other methods
 
     /**
@@ -138,5 +153,4 @@ public class MapGraph {
 
         return false;
     }
-
 }
