@@ -83,6 +83,11 @@ class MapGraphTest {
                 "Duplicate edges are not allowed.");
     }
 
+    @Test
+    void testEdgeValidation(){
+        assertTrue(mapDirectedWeighted.isEdge(0, 1));
+    }
+
     // Undirected graph edge and vertices test
 
     @Test
@@ -95,5 +100,11 @@ class MapGraphTest {
     void testUndirectedVertices() {
         assertEquals(2, mapUndirectedNotWeighted.getNumVertices(),
                 "Number of vertices should remain the same.");
+    }
+
+    @Test
+    void testUndirectedEdgeValidation(){
+        assertTrue(mapUndirectedNotWeighted.isEdge(3, 2),
+                "Reverse edge should automatically be created.");
     }
 }
