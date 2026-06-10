@@ -25,10 +25,34 @@ public class MapGraph {
     private int numVertices;
     private int numEdges;
 
-    // Constructor
+    // Constructor methods
+
+    // Constructor - 2 parameters
     public MapGraph(boolean directed, boolean weighted) {
         this.directed = directed;
         this.weighted = weighted;
+        this.vertices = new HashMap<>();
+        this.edges = new HashMap<>();
+        this.nameToId = new HashMap<>();
+        this.inDegree = new HashMap<>();
+        this.outDegree = new HashMap<>();
+    }
+
+    // Overloaded constructor - 1 parameter and unweighted default
+    public MapGraph(boolean directed) {
+        this.directed = directed;
+        this.weighted = false;
+        this.vertices = new HashMap<>();
+        this.edges = new HashMap<>();
+        this.nameToId = new HashMap<>();
+        this.inDegree = new HashMap<>();
+        this.outDegree = new HashMap<>();
+    }
+
+    // No argument constructor with undirected and unweighted defaults
+    public MapGraph() {
+        this.directed = false;
+        this.weighted = false;
         this.vertices = new HashMap<>();
         this.edges = new HashMap<>();
         this.nameToId = new HashMap<>();
