@@ -27,6 +27,11 @@ public class MapGraph {
     public MapGraph(boolean directed, boolean weighted) {
         this.directed = directed;
         this.weighted = weighted;
+        this.vertices = new HashMap<>();
+        this.edges = new HashMap<>();
+        this.nameToId = new HashMap<>();
+        this.inDegree = new HashMap<>();
+        this.outDegree = new HashMap<>();
     }
 
     // Accessor methods
