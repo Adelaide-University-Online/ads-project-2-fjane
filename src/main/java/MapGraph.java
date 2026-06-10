@@ -101,4 +101,16 @@ public class MapGraph {
     public Map<Integer, Integer> getOutDegrees() {
         return outDegree;
     }
+
+    // Other methods
+
+    /**
+     * Checks if a vertex already exists in vertices map by looking for duplication in either vertex ID or name.
+     * @param vertexId ID of vertex to be validated
+     */
+    private boolean isVertex(int vertexId) {
+        // Check if vertexId exists
+        return vertices.containsKey(vertexId);
+    }
+
 }
