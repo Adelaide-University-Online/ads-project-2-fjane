@@ -48,4 +48,25 @@ class MapGraphTest {
     void testUnweighted() {
         assertFalse(mapUndirectedNotWeighted.isWeighted());
     }
+
+    // Vertex tests
+
+    @Test
+    void testVertexCount() {
+        assertEquals(2, mapDirectedWeighted.getNumVertices());
+    }
+
+    @Test
+    void testDuplicateVerticesID() {
+        assertThrows(IllegalArgumentException.class, () ->
+                        mapDirectedWeighted.addVertex(0, "AA"),
+                "Exception should be thrown when attempting to add a new vertex that has an existing id.");
+    }
+
+    @Test
+    void testDuplicateVerticesName() {
+        assertThrows(IllegalArgumentException.class, () ->
+                        mapDirectedWeighted.addVertex(10, "B"),
+                "Exception should be thrown when attempting to add a new vertex that has an existing name.");
+    }
 }
