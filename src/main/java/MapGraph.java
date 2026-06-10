@@ -15,13 +15,13 @@ import java.util.*;
 public class MapGraph {
 
     // Attributes
-    protected Map<Integer, Vertex> vertices;
-    protected Map<Integer, List<Edge>> edges; // Adjacency list
-    protected Map<String, Integer> nameToId; // Reverse look up map for vertices
-    protected Map<Integer, Integer> inDegree;
-    protected Map<Integer, Integer> outDegree;
-    protected boolean directed;
-    protected boolean weighted;
+    private Map<Integer, Vertex> vertices;
+    private Map<Integer, List<Edge>> edges; // Adjacency list
+    private Map<String, Integer> nameToId; // Reverse look up map for vertices
+    private Map<Integer, Integer> inDegree;
+    private Map<Integer, Integer> outDegree;
+    private boolean directed;
+    private boolean weighted;
 
     // Constructor
     public MapGraph(boolean directed, boolean weighted) {
