@@ -15,13 +15,13 @@ import java.util.*;
 public class MapGraph {
 
     // Attributes
-    private Map<Integer, Vertex> vertices;
-    private Map<Integer, List<Edge>> edges; // Adjacency list
-    private Map<String, Integer> nameToId; // Reverse look up map for vertices
-    private Map<Integer, Integer> inDegree;
-    private Map<Integer, Integer> outDegree;
-    private boolean directed;
-    private boolean weighted;
+    private final Map<Integer, Vertex> vertices;
+    private final Map<Integer, List<Edge>> edges; // Adjacency list
+    private final Map<String, Integer> nameToId; // Reverse look up map for vertices
+    private final Map<Integer, Integer> inDegree;
+    private final Map<Integer, Integer> outDegree;
+    private final boolean directed;
+    private final boolean weighted;
     private int numVertices;
     private int numEdges;
 
@@ -111,6 +111,32 @@ public class MapGraph {
     private boolean isVertex(int vertexId) {
         // Check if vertexId exists
         return vertices.containsKey(vertexId);
+    }
+
+    /**
+     * Checks if Edge already exists in edges map.
+     * @param sourceId source Vertex's ID
+     * @param destinationId destination Vertex's ID
+     * @return false if Edge is not present
+     */
+    public boolean isEdge(int sourceId, int destinationId) {
+        // Get Map entry where key = sourceID
+        List<Edge> sourceEdges = edges.get(sourceId);
+
+        // False if no entry is found
+        if (sourceEdges == null) {
+            return false;
+        }
+
+        // Iterate through Map entry's values searching for destinationID
+        for (Edge edge : sourceEdges) {
+            // True if destinationId is found
+            if (edge.getDestination() == destinationId) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
