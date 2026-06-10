@@ -15,10 +15,10 @@ import java.util.Map;
 public interface Graph {
 
     /** Return the number of vertices. */
-    int numVertices();
+    int getNumVertices();
 
     /** Return the number of edges. */
-    int numEdges();
+    int getNumEdges();
 
     /** Return all the vertices in a graph. */
     Map<Integer, Vertex> getVertices();
