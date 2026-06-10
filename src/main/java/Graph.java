@@ -44,8 +44,8 @@ public interface Graph {
     /** Add a new Vertex to the graph. */
     void addVertex(int id, String name);
 
-    /** Add a new Edge to the graph. */
-    void addEdge(int sourceId, int destinationId);
+    /** Attempt to add new edge to graph and return boolean indicator of success. */
+    boolean addEdge(int sourceId, int destinationId);
 
     /** Checks if a Vertex exists in a graph. */
     boolean isVertex(int id, String name);
@@ -53,9 +53,7 @@ public interface Graph {
     /** Checks if an Edge exists in a graph. */
     boolean isEdge(int sourceId, int destinationId);
 
-    /** Return an iterator to the outgoing edges of a vertex.
-     * @param source The source vertex
-     */
+    /** Return an iterator to the outgoing edges of a vertex. */
     Iterator<Edge> edgeIterator(String source);
 
     /* Code inspired by:
