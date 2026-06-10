@@ -11,7 +11,7 @@ import java.util.*;
  *    the University's Academic Integrity Policy.
  **/
 
-public class MapGraph {
+public class MapGraph implements Graph{
 
     // Attributes
     private Map<Integer, Vertex> vertices;
