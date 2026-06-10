@@ -3,7 +3,6 @@ import java.util.*;
 /**
  * File: MapGraph.java
  * Description: This is a representation of a graph that uses an adjacency-map to represent vertices and edges.
- * MapGraph is an extension of the AbstractGraph class.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
  * Email ID: florence.sayavongsa@student.adelaide.edu.au
