@@ -148,6 +148,43 @@ public class MapGraph {
         outDegree.put(id,0);
     }
 
+    /**
+     * Creates a new Edge, adds it to the graph's edges map if it doesn't already exist.
+     * Verifies that the proposed Edge's endpoints exist in the graph's vertices map first.
+     * @param sourceId an integer id of a Vertex
+     * @param destinationId an integer id of a Vertex
+     */
+    public void addEdge(int sourceId, int destinationId) {
+        // Checks if source vertex exists in the vertices map
+        if(!isVertex(sourceId)) {
+            throw new IllegalArgumentException("Edge source endpoint does not exist.");
+        }
+
+        // Checks if destination vertex exists in the vertices map
+        if(!isVertex(destinationId)) {
+            throw new IllegalArgumentException("Edge destination endpoint does not exist.");
+        }
+
+        // Check if Edge already exists in edges map, if so return to avoid duplication
+        if(isEdge(sourceId, destinationId)) {
+            return;
+        }
+
+        // Adds new Edge to edges map
+        edges.get(sourceId).add(new Edge(sourceId, destinationId));
+
+        // Increment in and out-degree maps
+        inDegree.put(destinationId, inDegree.get(destinationId) + 1);
+        outDegree.put(sourceId, outDegree.get(sourceId) + 1);
+
+        // Adds new Edge to the adjacency map in the opposite direction for undirected graphs
+        if(!directed) {
+            edges.get(destinationId).add(new Edge(destinationId, sourceId));
+            inDegree.put(sourceId, inDegree.get(sourceId) + 1);
+            outDegree.put(destinationId, outDegree.get(destinationId) + 1);
+        }
+    }
+
     // Other methods
 
     /**
