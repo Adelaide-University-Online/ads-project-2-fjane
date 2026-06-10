@@ -22,6 +22,8 @@ public class MapGraph {
     private Map<Integer, Integer> outDegree;
     private boolean directed;
     private boolean weighted;
+    private int numVertices;
+    private int numEdges;
 
     // Constructor
     public MapGraph(boolean directed, boolean weighted) {
