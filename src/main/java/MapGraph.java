@@ -22,7 +22,7 @@ public class MapGraph {
     private Map<Integer, Integer> outDegree;
     private boolean directed;
     private boolean weighted;
-    private int numVertices;
+    //private int numVertices;
     private int numEdges;
 
     // Constructor methods
@@ -73,13 +73,13 @@ public class MapGraph {
     }
 
     /** Return the number of vertices. */
-    public int numVertices() {
+    public int getNumVertices() {
         return vertices.size();
     }
 
     /** Return the number of edges. */
-    public int numEdges() {
-        return edges.size();
+    public int getNumEdges() {
+        return numEdges;
     }
 
     /** Return all the vertices in a graph. */
@@ -177,11 +177,15 @@ public class MapGraph {
         inDegree.put(destinationId, inDegree.get(destinationId) + 1);
         outDegree.put(sourceId, outDegree.get(sourceId) + 1);
 
+        // Increment edge count
+        numEdges += 1;
+
         // Adds new Edge to the adjacency map in the opposite direction for undirected graphs
         if(!directed) {
             edges.get(destinationId).add(new Edge(destinationId, sourceId));
             inDegree.put(sourceId, inDegree.get(sourceId) + 1);
             outDegree.put(destinationId, outDegree.get(destinationId) + 1);
+            numEdges += 1;
         }
     }
 
