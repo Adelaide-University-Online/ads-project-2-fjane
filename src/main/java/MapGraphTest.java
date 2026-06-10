@@ -79,8 +79,7 @@ class MapGraphTest {
 
     @Test
     void testDuplicateEdges() {
-        mapDirectedWeighted.addEdge(0,1);
-        assertEquals(1, mapDirectedWeighted.getNumEdges(),
+        assertFalse(mapDirectedWeighted.addEdge(0,1),
                 "Duplicate edges are not allowed.");
     }
 
