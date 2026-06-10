@@ -104,7 +104,7 @@ public class MapGraph {
      * Returns a Vertex's ID (or null) by searching the vertices reverse loop map name.
      * @param name Vertex String name
      */
-    public int getVertexId(String name) {
+    public int getVertexIdByName(String name) {
         Integer id = nameToId.get(name);
 
         // Null check

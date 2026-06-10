@@ -46,8 +46,8 @@ public class GraphBuilder {
             // For each vertex pair, add a new edge to the edge map.
             for (int i = 0; i < parts.length-1; i++) {
                 // Use the vertices reverse lookup map to get the Vertex's ID
-                int destinationId = graph.getVertexId(parts[i]);
-                int sourceId = graph.getVertexId(parts[i + 1]);
+                int destinationId = graph.getVertexIdByName(parts[i]);
+                int sourceId = graph.getVertexIdByName(parts[i + 1]);
 
                 graph.addEdge(sourceId, destinationId);
             }
