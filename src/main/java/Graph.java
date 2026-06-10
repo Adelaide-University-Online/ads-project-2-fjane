@@ -48,10 +48,10 @@ public interface Graph {
     void addEdge(int sourceId, int destinationId);
 
     /** Checks if a Vertex exists in a graph. */
-    void isVertex(int id, String name);
+    boolean isVertex(int id, String name);
 
     /** Checks if an Edge exists in a graph. */
-    void isEdge(int sourceId, int destinationId);
+    boolean isEdge(int sourceId, int destinationId);
 
     /** Return an iterator to the outgoing edges of a vertex.
      * @param source The source vertex
