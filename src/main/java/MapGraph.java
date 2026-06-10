@@ -221,4 +221,34 @@ public class MapGraph {
 
         return false;
     }
+
+    /** Returns a String representation of an adjacency list. Each line contains a Vertex, and it's outgoing Edges. */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        // Add each edges (adjacency list) entry to StringBuilder
+        for (Map.Entry<Integer, List<Edge>> entry : edges.entrySet()) {
+
+            // Use source vertex's ID to look up and append name
+            int sourceId = entry.getKey();
+            sb.append(vertices.get(sourceId).getName()).append(": [");
+
+            // Iterate through list of outgoing Edges
+            Iterator<Edge> edgeIterator = entry.getValue().iterator();
+            while (edgeIterator.hasNext()) {
+                Edge edge = edgeIterator.next();
+
+                // Append destination Vertex name
+                sb.append(vertices.get(edge.getDestination()).getName());
+
+                if (edgeIterator.hasNext()) {
+                    sb.append(", ");
+                }
+            }
+            sb.append("]\n");
+        }
+
+        return sb.toString();
+    }
 }
