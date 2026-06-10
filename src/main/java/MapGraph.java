@@ -103,7 +103,7 @@ public class MapGraph {
     }
 
     /**
-     * Returns a Vertex's ID (or null) by searching the verticse reverse loop map name.
+     * Returns a Vertex's ID (or null) by searching the vertices reverse loop map name.
      * @param name Vertex String name
      */
     public int getVertexId(String name) {
@@ -115,6 +115,37 @@ public class MapGraph {
         }
 
         return id;
+    }
+
+    // Modifier methods
+
+    /**
+     * Creates a new Vertex, adds it to the graph's vertices map and the vertices reverse lookup map.
+     * @param id an integer ID
+     * @param name a String name
+     * @throws IllegalArgumentException if vertex ID or name already exists
+     */
+    public void addVertex(int id, String name) throws IllegalArgumentException{
+        // Check for duplicate Vertex ID
+        if (vertices.containsKey(id)) {
+            throw new IllegalArgumentException(
+                    "Vertex ID " + id + " already exists.");
+        }
+
+        // Check for duplicate Vertex name
+        if (nameToId.containsKey(name)) {
+            throw new IllegalArgumentException(
+                    "Vertex name " + name + " already exists.");
+        }
+
+        // Add new Vertex to the vertices and vertices reverse look up maps
+        vertices.put(id, new Vertex(id, name));
+        nameToId.put(name, id);
+
+        // Initialize vertex entry in edges, in-degree and out-degree maps
+        edges.put(id, new ArrayList<>());
+        inDegree.put(id,0);
+        outDegree.put(id,0);
     }
 
     // Other methods
