@@ -25,4 +25,27 @@ class MapGraphTest {
         mapUndirectedNotWeighted.addEdge(2,3);
     }
 
+    // Graph directionality tests
+
+    @Test
+    void testDirected() {
+        assertTrue(mapDirectedWeighted.isDirected());
+    }
+
+    @Test
+    void testUndirected() {
+        assertFalse(mapUndirectedNotWeighted.isDirected());
+    }
+
+    // Graph weighted tests
+
+    @Test
+    void testWeighted() {
+        assertTrue(mapDirectedWeighted.isWeighted());
+    }
+
+    @Test
+    void testUnweighted() {
+        assertFalse(mapUndirectedNotWeighted.isWeighted());
+    }
 }
