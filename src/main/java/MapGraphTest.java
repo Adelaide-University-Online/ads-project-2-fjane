@@ -83,4 +83,18 @@ class MapGraphTest {
         assertEquals(1, mapDirectedWeighted.getNumEdges(),
                 "Duplicate edges are not allowed.");
     }
+
+    // Undirected graph edge and vertices test
+
+    @Test
+    void testUndirectedEdges() {
+        assertEquals(2, mapUndirectedNotWeighted.getNumEdges(),
+                "Edge count should be double the number of edges added.");
+    }
+
+    @Test
+    void testUndirectedVertices() {
+        assertEquals(2, mapUndirectedNotWeighted.getNumVertices(),
+                "Number of vertices should remain the same.");
+    }
 }
