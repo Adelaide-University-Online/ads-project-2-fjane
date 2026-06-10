@@ -195,7 +195,7 @@ public class MapGraph {
      * Checks if a vertex already exists in vertices map by looking for duplication in either vertex ID or name.
      * @param vertexId ID of vertex to be validated
      */
-    private boolean isVertex(int vertexId) {
+    public boolean isVertex(int vertexId) {
         // Check if vertexId exists
         return vertices.containsKey(vertexId);
     }
@@ -224,6 +224,14 @@ public class MapGraph {
         }
 
         return false;
+    }
+
+    /** Returns an iterator to the outgoing Edges of a Vertex. */
+    public Iterator<Edge> edgeIterator(int sourceId) {
+        if (!vertices.containsKey(sourceId)) {
+            throw new IllegalArgumentException("Vertex ID " + sourceId + " already exists.");
+        }
+        return edges.get(sourceId).iterator();
     }
 
     /** Returns a String representation of an adjacency list. Each line contains a Vertex, and it's outgoing Edges. */
