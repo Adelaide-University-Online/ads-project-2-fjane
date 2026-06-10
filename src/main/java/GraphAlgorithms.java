@@ -18,7 +18,7 @@ public class GraphAlgorithms {
      * @return List of sorted vertices
      * @throws IllegalStateException if a cycle is detected
      */
-    public static List<Integer> kahnsTopological(MapGraph graph) {
+    public static List<Integer> kahnsBFS(MapGraph graph) {
 
         // Create a new map to hold vertex in-degree information (to prevent mutating graph state)
         Map<Integer, Integer> inDegree = graph.getInDegrees();
@@ -66,5 +66,41 @@ public class GraphAlgorithms {
     }
     /* Code inspired by:
     Interview Cake. (n.d). Topological Sort. https://www.interviewcake.com/concept/java/topological-sort
+    */
+
+    /**
+     * Computes the longest prerequisite path length for every vertex.
+     * @param graph A directed acyclic graph
+     * @return A map of each vertex and its longest prerequisite chain length
+     */
+    public static Map<Integer, Integer> longestPath( MapGraph graph) {
+        // Get Kahn's BFS result
+        List<Integer> kahnsBFSOrder = kahnsBFS(graph);
+
+        // Store the longest prerequisite path to get to each vertex. Initialize every vertex with 0 depth.
+        Map<Integer, Integer> longestPath = new HashMap<>();
+        for (Integer vertexId : graph.getVertices().keySet()) {
+            longestPath.put(vertexId, 0);
+        }
+
+        // Iterate through all vertices in topological order
+        for (Integer current : kahnsBFSOrder) {
+            // Iterate through current vertex's neighbours
+            Iterator<Edge> edgeIterator = graph.edgeIterator(current);
+            while (edgeIterator.hasNext()) {
+                int neighbour = edgeIterator.next().getDestination();
+
+                // Increment path depth, neighbour must come at least one level after current
+                longestPath.put(neighbour,
+                        // Use the greater of existing value or incremented current
+                        Math.max(longestPath.get(neighbour), longestPath.get(current) + 1));
+            }
+        }
+
+        return longestPath;
+    }
+    /* Code inspired by:
+    Geeks for Geeks. (2025, July 23). Longest Path in a Directed Acyclic Graph.
+    https://www.geeksforgeeks.org/dsa/find-longest-path-directed-acyclic-graph/
     */
 }
