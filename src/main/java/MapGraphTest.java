@@ -112,4 +112,20 @@ class MapGraphTest {
         assertTrue(mapUndirectedNotWeighted.isEdge(3, 2),
                 "Reverse edge should automatically be created.");
     }
+
+    // Degree maps tests
+
+    @Test
+    void testInDegreeMap(){
+        Map<Integer, Integer> inDegrees = mapDirectedWeighted.getInDegrees();
+        assertTrue(inDegrees.containsKey(0));
+        assertTrue(inDegrees.containsValue(0));
+    }
+
+    @Test
+    void testOutDegreeMap(){
+        Map<Integer, Integer> outDegrees = mapDirectedWeighted.getOutDegrees();
+        assertTrue(outDegrees.containsKey(0));
+        assertTrue(outDegrees.containsValue(1));
+    }
 }
