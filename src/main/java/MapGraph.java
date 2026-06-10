@@ -216,8 +216,11 @@ public class MapGraph {
         }
 
         // Iterate through Map entry's values searching for destinationID
-        for (Edge edge : sourceEdges) {
-            // True if destinationId is found
+        Iterator<Edge> edgeIterator = edgeIterator(sourceId);
+
+        while (edgeIterator.hasNext()) {
+            Edge edge = edgeIterator.next();
+
             if (edge.getDestination() == destinationId) {
                 return true;
             }
