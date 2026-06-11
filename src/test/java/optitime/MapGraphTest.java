@@ -1,3 +1,5 @@
+package optitime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +27,7 @@ class MapGraphTest {
         mapUndirectedNotWeighted.addEdge(2,3);
     }
 
-    // Graph directionality tests
+    // optitime.Graph directionality tests
 
     @Test
     void testDirected() {
@@ -37,7 +39,7 @@ class MapGraphTest {
         assertFalse(mapUndirectedNotWeighted.isDirected());
     }
 
-    // Graph weighted tests
+    // optitime.Graph weighted tests
 
     @Test
     void testWeighted() {
@@ -49,7 +51,7 @@ class MapGraphTest {
         assertFalse(mapUndirectedNotWeighted.isWeighted());
     }
 
-    // Vertex tests
+    // optitime.Vertex tests
 
     @Test
     void testVertexCount() {
@@ -75,7 +77,7 @@ class MapGraphTest {
         assertEquals(0, mapDirectedWeighted.getVertexIdByName("A"));
     }
 
-    // Edge tests
+    // optitime.Edge tests
 
     @Test
     void testEdgeCount() {
@@ -98,7 +100,7 @@ class MapGraphTest {
     @Test
     void testUndirectedEdges() {
         assertEquals(2, mapUndirectedNotWeighted.getNumEdges(),
-                "Edge count should be double the number of edges added.");
+                "optitime.Edge count should be double the number of edges added.");
     }
 
     @Test
