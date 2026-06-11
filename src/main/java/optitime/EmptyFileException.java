@@ -1,5 +1,7 @@
+package optitime;
+
 /**
- * File: EmptyFileException.java
+ * File: optitime.EmptyFileException.java
  * Description: Thrown to indicate an empty file with no data has been scanned. It is an unchecked exception thrown
  * when attempting to read data.
  * Author: Florence Sayavongsa

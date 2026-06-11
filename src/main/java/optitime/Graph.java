@@ -1,9 +1,11 @@
+package optitime;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 /**
- * File: Graph.java
+ * File: optitime.Graph.java
  * Description: This interface includes operations used to construct, manipulate, and traverse a graph data structure.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
@@ -41,16 +43,16 @@ public interface Graph {
     /** Return true if the graph is weighted. */
     boolean isWeighted();
 
-    /** Add a new Vertex to the graph. */
+    /** Add a new optitime.Vertex to the graph. */
     void addVertex(int id, String name);
 
     /** Attempt to add new edge to graph and return boolean indicator of success. */
     boolean addEdge(int sourceId, int destinationId);
 
-    /** Checks if a Vertex exists in a graph. */
+    /** Checks if a optitime.Vertex exists in a graph. */
     boolean isVertex(int id);
 
-    /** Checks if an Edge exists in a graph. */
+    /** Checks if an optitime.Edge exists in a graph. */
     boolean isEdge(int sourceId, int destinationId);
 
     /** Return an iterator to the outgoing edges of a vertex. */

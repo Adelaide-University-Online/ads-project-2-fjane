@@ -1,7 +1,9 @@
+package optitime;
+
 import java.util.*;
 
 /**
- * File: GraphAlgorithms.java
+ * File: optitime.GraphAlgorithms.java
  * Description: This class is a collection of algorithms that can be applied to directed graphs.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
@@ -59,7 +61,7 @@ public class GraphAlgorithms {
 
         // Cycle detection
         if (topoResult.size() != graph.getVertices().size()) {
-            throw new IllegalStateException("Graph contains a cycle — topological sort not possible");
+            throw new IllegalStateException("Graph contains a cycle — topological sort not possible.");
         }
 
         return topoResult;
@@ -120,7 +122,7 @@ public class GraphAlgorithms {
             Map<Integer, Integer> longest,
             int binSize) {
 
-        // Get graph's outdegree map - prioritizes vertices with more dependents
+        // Get graph's outdegree map
         Map<Integer, Integer> outDegree = new HashMap<>(graph.getOutDegrees());
 
         // Sort by ascending critical path length first, then by descending out-degree
@@ -129,17 +131,18 @@ public class GraphAlgorithms {
                 .thenComparingInt((Integer c) -> -outDegree.get(c))
         );
 
-        // Return results in ascending bin order
+        // Store results in ascending bin order
         Map<Integer, List<Integer>> levelMap = new TreeMap<>();
 
         // Track which bin a vertex has been placed in - to ensure prerequisites are placed in an earlier bin
         Map<Integer, Integer> assignedTerm = new HashMap<>();
 
-        // Loop through sorted vertices (EDF order based on critical path length)
+        // Loop through sorted vertices
         for (Integer course : topoOrder) {
-            // Minimum bin
+            // Minimum bin level
             int minBin = 1;
 
+            // Retrieve vertices
             Map<Integer, Vertex> vertices = new HashMap<>(graph.getVertices());
 
             // Find all prerequisites of a vertex and increase minBin for each found
@@ -163,9 +166,10 @@ public class GraphAlgorithms {
                 }
             }
 
-            // First-Fit placement. Start from earliest valid bin and scan forward until a bin with availability is found
+            // First-Fit bin placement
             int bin = minBin;
 
+            // Start from earliest valid bin and scan forward until a bin with availability is found
             // getOrDefault - null check protection, returns an empty list if term hasn't been created yet
             while (levelMap.getOrDefault(bin, Collections.emptyList()).size() >= binSize) {
                 bin++; // Move to next term if current is at full capacity

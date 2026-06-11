@@ -1,7 +1,9 @@
+package optitime;
+
 import java.util.*;
 
 /**
- * File: MapGraph.java
+ * File: optitime.MapGraph.java
  * Description: This is a representation of a graph that uses an adjacency-map to represent vertices and edges.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
@@ -101,8 +103,8 @@ public class MapGraph implements Graph{
     }
 
     /**
-     * Returns a Vertex's ID (or null) by searching the vertices reverse loop map name.
-     * @param name Vertex String name
+     * Returns an optitime.Vertex's ID (or null) by searching the vertices reverse loop map name.
+     * @param name optitime.Vertex String name
      */
     public int getVertexIdByName(String name) {
         Integer id = nameToId.get(name);
@@ -118,25 +120,25 @@ public class MapGraph implements Graph{
     // Modifier methods
 
     /**
-     * Creates a new Vertex, adds it to the graph's vertices map and the vertices reverse lookup map.
+     * Creates a new optitime.Vertex, adds it to the graph's vertices map and the vertices reverse lookup map.
      * @param id an integer ID
      * @param name a String name
      * @throws IllegalArgumentException if vertex ID or name already exists
      */
     public void addVertex(int id, String name) throws IllegalArgumentException{
-        // Check for duplicate Vertex ID
+        // Check for duplicate optitime.Vertex ID
         if (vertices.containsKey(id)) {
             throw new IllegalArgumentException(
                     "Vertex ID " + id + " already exists.");
         }
 
-        // Check for duplicate Vertex name
+        // Check for duplicate optitime.Vertex name
         if (nameToId.containsKey(name)) {
             throw new IllegalArgumentException(
                     "Vertex name " + name + " already exists.");
         }
 
-        // Add new Vertex to the vertices and vertices reverse look up maps
+        // Add new optitime.Vertex to the vertices and vertices reverse look up maps
         vertices.put(id, new Vertex(id, name));
         nameToId.put(name, id);
 
@@ -147,10 +149,10 @@ public class MapGraph implements Graph{
     }
 
     /**
-     * Creates a new Edge, adds it to the graph's edges map if it doesn't already exist.
-     * Verifies that the proposed Edge's endpoints exist in the graph's vertices map first.
-     * @param sourceId an integer id of a Vertex
-     * @param destinationId an integer id of a Vertex
+     * Creates a new optitime.Edge, adds it to the graph's edges map if it doesn't already exist.
+     * Verifies that the proposed optitime.Edge's endpoints exist in the graph's vertices map first.
+     * @param sourceId an integer id of an optitime.Vertex
+     * @param destinationId an integer id of an optitime.Vertex
      */
     public boolean addEdge(int sourceId, int destinationId) {
         // Checks if source vertex exists in the vertices map
@@ -163,12 +165,12 @@ public class MapGraph implements Graph{
             throw new IllegalArgumentException("Edge destination endpoint does not exist.");
         }
 
-        // Check if Edge already exists in edges map, if so return to avoid duplication
+        // Check if optitime.Edge already exists in edges map, if so return to avoid duplication
         if(isEdge(sourceId, destinationId)) {
             return false;
         }
 
-        // Adds new Edge to edges map
+        // Adds new optitime.Edge to edges map
         edges.get(sourceId).add(new Edge(sourceId, destinationId));
 
         // Increment in and out-degree maps
@@ -178,7 +180,7 @@ public class MapGraph implements Graph{
         // Increment edge count
         numEdges += 1;
 
-        // Adds new Edge to the adjacency map in the opposite direction for undirected graphs
+        // Adds new optitime.Edge to the adjacency map in the opposite direction for undirected graphs
         if(!directed) {
             edges.get(destinationId).add(new Edge(destinationId, sourceId));
             inDegree.put(sourceId, inDegree.get(sourceId) + 1);
@@ -201,10 +203,10 @@ public class MapGraph implements Graph{
     }
 
     /**
-     * Checks if Edge already exists in edges map.
-     * @param sourceId source Vertex's ID
-     * @param destinationId destination Vertex's ID
-     * @return false if Edge is not present
+     * Checks if optitime.Edge already exists in edges map.
+     * @param sourceId source optitime.Vertex's ID
+     * @param destinationId destination optitime.Vertex's ID
+     * @return false if optitime.Edge is not present
      */
     public boolean isEdge(int sourceId, int destinationId) {
         // Get Map entry where key = sourceID
@@ -229,7 +231,7 @@ public class MapGraph implements Graph{
         return false;
     }
 
-    /** Returns an iterator to the outgoing Edges of a Vertex. */
+    /** Returns an iterator to the outgoing Edges of a optitime.Vertex. */
     public Iterator<Edge> edgeIterator(int sourceId) {
         if (!vertices.containsKey(sourceId)) {
             throw new IllegalArgumentException("Vertex ID " + sourceId + " already exists.");
@@ -237,7 +239,7 @@ public class MapGraph implements Graph{
         return edges.get(sourceId).iterator();
     }
 
-    /** Returns a String representation of an adjacency list. Each line contains a Vertex, and it's outgoing Edges. */
+    /** Returns a String representation of an adjacency list. Each line contains an optitime.Vertex, and it's outgoing Edges. */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

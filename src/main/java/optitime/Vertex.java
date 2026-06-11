@@ -1,5 +1,7 @@
+package optitime;
+
 /**
- * File: Vertex.java
+ * File: optitime.Vertex.java
  * Description: This class represents a single vertex in a graph.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
@@ -44,7 +46,7 @@ public class Vertex {
     /**
      * Compares an object with this.instance.
      * @param obj   The reference object to be compared
-     * @return true if the comparison Vertex object has the same id
+     * @return true if the comparison optitime.Vertex object has the same id
      */
     @Override
     public boolean equals(Object obj){
@@ -69,13 +71,13 @@ public class Vertex {
         return this.id == other.id;
     }
 
-    /** Returns a hash code value for this Vertex object based on ID. */
+    /** Returns a hash code value for this optitime.Vertex object based on ID. */
     @Override
     public int hashCode() {
         return Integer.hashCode(id);
     }
 
-    /** Returns a String representation of this Vertex object including name and ID. */
+    /** Returns a String representation of this optitime.Vertex object including name and ID. */
     public String toString() {
         return name + " (" + id + ")";
     }

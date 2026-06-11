@@ -1,7 +1,9 @@
+package optitime;
+
 import java.util.Objects;
 
 /**
- * File: Edge.java
+ * File: optitime.Edge.java
  * Description: This class represents an edge between two vertices in a graph. An edge can be weighted and assigned
  * values to represent significance such as distance, cost or time. Otherwise, unweighted edges in a graph share
  * the same level of significance.
@@ -61,7 +63,7 @@ public class Edge {
     /**
      * Compares an object with this.instance.
      * @param obj   The reference object to be compared
-     * @return true if the comparison Edge object has the same sourceId and destinationId
+     * @return true if the comparison optitime.Edge object has the same sourceId and destinationId
      */
     @Override
     public boolean equals(Object obj) {
@@ -89,9 +91,9 @@ public class Edge {
         return Objects.hash(sourceId, destinationId);
     }
 
-    /** Returns a String representation of this Edge object including Vertex endpoints and edge weight. */
+    /** Returns a String representation of this optitime.Edge object including optitime.Vertex endpoints and edge weight. */
     @Override
     public String toString() {
-        return "Edge: " + sourceId + " -> " + destinationId + " (" + weight + ")";
+        return "optitime.Edge: " + sourceId + " -> " + destinationId + " (" + weight + ")";
     }
 }

@@ -1,7 +1,9 @@
+package optitime;
+
 import java.util.Scanner;
 
 /**
- * File: GraphBuilder.java
+ * File: optitime.GraphBuilder.java
  * Description: This class includes helper methods to build graphs including loading data from text files and getting
  * user input.
  * Author: Florence Sayavongsa
@@ -45,7 +47,7 @@ public class GraphBuilder {
 
             // For each vertex pair, add a new edge to the edge map.
             for (int i = 0; i < parts.length-1; i++) {
-                // Use the vertices reverse lookup map to get the Vertex's ID
+                // Use the vertices reverse lookup map to get the optitime.Vertex's ID
                 int destinationId = graph.getVertexIdByName(parts[i]);
                 int sourceId = graph.getVertexIdByName(parts[i + 1]);
 

@@ -1,11 +1,12 @@
-import javax.swing.*;
+package optitime;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
 
 /**
- * File: CourseScheduler.java
+ * File: optitime.CourseScheduler.java
  * Description: This is the entry to the application. It populates a course schedule based on a course file name and
  * amount of subjects to be taken concurrently provided by user input. It handles reading in a text file containing
  * a course's subjects and prerequisites. Course schedule will be printed to screen and written to current working
@@ -159,8 +160,8 @@ public class CourseScheduler {
      * Prints populated course schedule to screen, and writes to text file.
      * Course subjects are scheduled to respect prerequisite order and allow a student to complete the course in as
      * few study periods as possible given the number of subjects they wish to take per study period.
-     * @param graph MapGraph adjacency list representation of course subjects and prerequisites
-     * @param binPack List of ordered course subjects (provided as Vertex IDs) to be taken per study period
+     * @param graph optitime.MapGraph adjacency list representation of course subjects and prerequisites
+     * @param binPack List of ordered course subjects (provided as optitime.Vertex IDs) to be taken per study period
      * @param courseCode Code of course to be taken
      */
     public static void printPlan(MapGraph graph, Map<Integer, List<Integer>> binPack, String courseCode) throws FileNotFoundException{
@@ -178,13 +179,13 @@ public class CourseScheduler {
         System.out.println("Course Code: " + courseCode.replace(".txt", "").toUpperCase() + "\n");
         writer.println("");
 
-        // Get vertices map for course name (Vertex name) look up
+        // Get vertices map for course name (optitime.Vertex name) look up
         Map<Integer, Vertex> vertices = graph.getVertices();
 
         for (Map.Entry<Integer, List<Integer>> entry : binPack.entrySet()) {
             List<String> studyCourses = new ArrayList<>();
 
-            // Find course ID in vertices Map and add corresponding course name (Vertex name)
+            // Find course ID in vertices Map and add corresponding course name (optitime.Vertex name)
             for (Integer courseId : entry.getValue()) {
                 Vertex course = vertices.get(courseId);
 
