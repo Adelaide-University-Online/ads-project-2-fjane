@@ -21,10 +21,10 @@ public class GraphAlgorithms {
     public static List<Integer> kahnsBFS(MapGraph graph) {
 
         // Create a new map to hold vertex in-degree information (to prevent mutating graph state)
-        Map<Integer, Integer> inDegree = graph.getInDegrees();
+        Map<Integer, Integer> inDegree = new HashMap<>(graph.getInDegrees());
 
         // Create a queue and add vertices with 0 in-degree
-        Queue<Integer> noIncoming = new ArrayDeque<>();
+        Queue<Integer> noIncoming = new PriorityQueue<>();
         for (Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
             if (entry.getValue() == 0) noIncoming.add(entry.getKey());
         }
