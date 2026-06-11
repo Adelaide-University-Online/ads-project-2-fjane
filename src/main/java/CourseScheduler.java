@@ -2,9 +2,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * File: CourseScheduler.java
@@ -47,17 +45,6 @@ public class CourseScheduler {
             }
         }
 
-        // Parse text file data to new graph object creation
-        AbstractGraph graph = AbstractGraph.createGraph(fileScanner, true, false);
-
-        // Sort graph vertices into a linear order
-        List<String> courseBuilder = GraphAlgorithms.kahnsTopological(graph);
-
-        // Number of courses user wants to take concurrently per study period
-        int concurrent = concurrentCourses(userInput);
-
-        // Write populated course schedule to txt file and print to screen
-        printPlan(courseBuilder, concurrent, courseCode);
     }
 
     /**
@@ -66,7 +53,6 @@ public class CourseScheduler {
      * @return Scanner file reader containing the requested course file
      */
     public static String courseCode(Scanner userInput) {
-
         // Get user input for course file name - case-insensitive by default
         System.out.println("Please enter course file name. Eg: XBIT.txt");
         return userInput.nextLine().trim();
@@ -147,14 +133,15 @@ public class CourseScheduler {
     */
 
     /**
-     * Populates course schedule, prints to screen, and writes to text file.
-     * Course schedule breaks up sorted list of courses by number of concurrent subjects to be taken per study period.
-     * @param courses Ordered list of courses returned by Kahn's topological sort algorithm
-     * @param coursesPerTerm Amount of subjects user wishes to enrol in per study period
-     * @param courseCode     Code of the course provided by user
+     * Prints populated course schedule to screen, and writes to text file.
+     * Course subjects are scheduled to respect prerequisite order and allow a student to complete the course in as
+     * few study periods as possible given the number of subjects they wish to take per study period.
+     * @param graph MapGraph adjacency list representation of course subjects and prerequisites
+     * @param binPack List of ordered course subjects (provided as Vertex IDs) to be taken per study period
+     * @param courseCode Code of course to be taken
      * @throws FileNotFoundException
      */
-    public static void printPlan(List<String> courses, int coursesPerTerm, String courseCode) throws FileNotFoundException {
+    public static void printPlan(MapGraph graph, Map<Integer, List<Integer>> binPack, String courseCode) throws FileNotFoundException {
 
         // Integer for print
         int studyPeriod = 1;
@@ -170,15 +157,22 @@ public class CourseScheduler {
             System.out.println("Course Code: " + courseCode.replace(".txt", "").toUpperCase() + "\n");
             writer.println("");
 
-            for (int i = 0; i < courses.size(); i += coursesPerTerm) {
-                // Splice course subject list by study period load
-                // Use Math.min to keep index inbound - returns smaller of the two elements
-                List<String> studyCourses = courses.subList(i, Math.min(i + coursesPerTerm, courses.size()));
+            // Get vertices map for course name (Vertex name) look up
+            Map<Integer, Vertex> vertices = graph.getVertices();
 
-                // Write data to the file
+            for (Map.Entry<Integer, List<Integer>> entry : binPack.entrySet()) {
+                List<String> studyCourses = new ArrayList<>();
+
+                // Find course ID in vertices Map and add corresponding course name (Vertex name)
+                for (Integer courseId : entry.getValue()) {
+                    Vertex course = vertices.get(courseId);
+
+                    if (course != null) {
+                        studyCourses.add(course.getName());
+                    }
+                }
+
                 writer.println("Study Period " + studyPeriod + ": " + String.join(", ", studyCourses));
-
-                // Print sublists per study period
                 System.out.println("Study Period " + studyPeriod + ": " + String.join(", ", studyCourses));
 
                 studyPeriod++;
