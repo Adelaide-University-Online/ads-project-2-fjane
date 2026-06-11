@@ -1,18 +1,27 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/6MtIQWZn)
-# ADS Assignment Starter
+Course Scheduler Tool
+========
 
-A basic Java starter project for Algorithms and Data Structures assignments. This project provides a simple foundation that students can build upon for their coursework.
+This is a Java tool used to schedule subjects, allowing a student to progress through a University course as quickly as 
+possible given subject prerequisite requirements. 
 
-## Project Structure
+###  Process 
+1. Import course subject data from a text file.
+2. Parse the data into a Map implementation of an adjacency list to define subject prerequisites.
+3. Apply Kahn’s algorithm (priority queue modification).
+4. Calculates each subject's longest prerequisite path length.
+5. Apply greedy first-fit algorithm using results from Steps 3 & 4 to generate an optimized course schedule.  
+Note: A course cannot be taken in the same study period as its prerequisite.
 
-```
-ADSAssignmentStarter/
-├── src/
-│   └── main/
-│       └── java/
-│           └── Main.java          # Main entry point with example code
-├── .gitignore                     # Git ignore file for Java projects
-└── README.md                      # This file
-```
+###  File format
+The first line of the text file must list all subjects required to complete the course. 
+All following lines will detail each subject and any required prerequisites. 
 
-**Good luck with your assignments!** 🚀
+In the example below, MATH2032 must be completed before MATH1080 and MATH1080 must be completed before MATH1081. 
+Example: MATH1081, MATH1080, MATH2032
+
+### Instructions
+A user will be prompted to enter a course file name for example “XBDA.txt” and how many subjects they would like to 
+complete concurrently up to a maximum of 4 subjects. A schedule will be populated, and written to a text file. 
+
+Created by Florence Sayavongsa #3056629
+
