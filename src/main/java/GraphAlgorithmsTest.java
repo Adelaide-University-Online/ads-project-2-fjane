@@ -27,6 +27,8 @@ class GraphAlgorithmsTest {
 
     }
 
+    // Kahn's BFS tests
+
     @Test
     void testKhansReturnSize() {
         List<Integer> result = GraphAlgorithms.kahnsBFS(mapDirected);
@@ -58,5 +60,39 @@ class GraphAlgorithmsTest {
         List<Integer> result = GraphAlgorithms.kahnsBFS(mapDirected);
         assertEquals(mapDirected.getNumVertices(), result.size(),
                 "Kahns topological sort should include all vertices - including those that are disconnected.");
+    }
+
+    // Longest Path test
+
+    @Test
+    void longestPathValidation() {
+        mapDirected.addVertex(5, "F");
+
+        Map<Integer, Integer> longest = GraphAlgorithms.longestPath(mapDirected);
+
+        assertEquals(0, longest.get(0)); // A
+        assertEquals(1, longest.get(1)); // B
+        assertEquals(2, longest.get(2)); // C
+        assertEquals(3, longest.get(3)); // D
+        assertEquals(4, longest.get(4)); // E
+        assertEquals(0, longest.get(0)); // F Disconnected vertex
+    }
+
+    // Greedy First Fit test
+
+    @Test
+    void greedyBinResultSize() {
+        mapDirected.addVertex(5, "F"); // Disconnected vertex
+
+        List<Integer> topo = GraphAlgorithms.kahnsBFS(mapDirected);
+        Map<Integer, Integer> longest = GraphAlgorithms.longestPath(mapDirected);
+        Map<Integer, List<Integer>> result = GraphAlgorithms.greedyBinPack(topo, mapDirected, longest, 2);
+
+        int totalVertices = 0;
+
+        for (List<Integer> bin : result.values()) {
+            totalVertices += bin.size();
+        }
+        assertEquals(6, totalVertices, "Greedy bin pack should return all vertices.");
     }
 }
