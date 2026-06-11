@@ -45,6 +45,28 @@ public class CourseScheduler {
             }
         }
 
+        // Parse text file data to new graph object creation
+        MapGraph graph = GraphBuilder.createMapFromFile(fileScanner, true, false);
+
+        // Sort course subjects into linear order using Kahn's algorithm to respect prerequisites
+        List<Integer> topo = GraphAlgorithms.kahnsBFS(graph);
+
+        // Calculate each course subject's longest path
+        Map<Integer, Integer> longest = GraphAlgorithms.longestPath(graph);
+
+        // Get number of courses user wants to take concurrently per study period
+        int concurrent = concurrentCourses(userInput);
+
+        // Generate course schedule
+        Map<Integer, List<Integer>> binPack = GraphAlgorithms.greedyBinPack(topo, graph, longest, concurrent);
+
+        // Print course schedule
+        try {
+            printPlan(graph, binPack, courseCode);
+        } catch (FileNotFoundException e) {
+            System.err.println("Could not create schedule file.");
+        }
+
     }
 
     /**
@@ -53,6 +75,7 @@ public class CourseScheduler {
      * @return Scanner file reader containing the requested course file
      */
     public static String courseCode(Scanner userInput) {
+
         // Get user input for course file name - case-insensitive by default
         System.out.println("Please enter course file name. Eg: XBIT.txt");
         return userInput.nextLine().trim();
@@ -83,7 +106,7 @@ public class CourseScheduler {
      */
     public static int concurrentCourses(Scanner userInput){
 
-        int concurrent = 0;
+        int concurrent;
         int minLoad = 1;
         int maxLoad = 4;
 
@@ -139,54 +162,48 @@ public class CourseScheduler {
      * @param graph MapGraph adjacency list representation of course subjects and prerequisites
      * @param binPack List of ordered course subjects (provided as Vertex IDs) to be taken per study period
      * @param courseCode Code of course to be taken
-     * @throws FileNotFoundException
      */
-    public static void printPlan(MapGraph graph, Map<Integer, List<Integer>> binPack, String courseCode) throws FileNotFoundException {
+    public static void printPlan(MapGraph graph, Map<Integer, List<Integer>> binPack, String courseCode) throws FileNotFoundException{
 
         // Integer for print
         int studyPeriod = 1;
 
-        try {
-            // Initialize PrintWriter with new File object
-            PrintWriter writer = new PrintWriter("courseSchedule.txt");
+        // Initialize PrintWriter with new File object
+        PrintWriter writer = new PrintWriter("courseSchedule.txt");
 
-            // Print course code title
-            writer.println("Course Code: " + courseCode.replace(".txt", "").toUpperCase());
-            writer.println("");
+        // Print course code title
+        writer.println("Course Code: " + courseCode.replace(".txt", "").toUpperCase());
+        writer.println("");
 
-            System.out.println("Course Code: " + courseCode.replace(".txt", "").toUpperCase() + "\n");
-            writer.println("");
+        System.out.println("Course Code: " + courseCode.replace(".txt", "").toUpperCase() + "\n");
+        writer.println("");
 
-            // Get vertices map for course name (Vertex name) look up
-            Map<Integer, Vertex> vertices = graph.getVertices();
+        // Get vertices map for course name (Vertex name) look up
+        Map<Integer, Vertex> vertices = graph.getVertices();
 
-            for (Map.Entry<Integer, List<Integer>> entry : binPack.entrySet()) {
-                List<String> studyCourses = new ArrayList<>();
+        for (Map.Entry<Integer, List<Integer>> entry : binPack.entrySet()) {
+            List<String> studyCourses = new ArrayList<>();
 
-                // Find course ID in vertices Map and add corresponding course name (Vertex name)
-                for (Integer courseId : entry.getValue()) {
-                    Vertex course = vertices.get(courseId);
+            // Find course ID in vertices Map and add corresponding course name (Vertex name)
+            for (Integer courseId : entry.getValue()) {
+                Vertex course = vertices.get(courseId);
 
-                    if (course != null) {
-                        studyCourses.add(course.getName());
-                    }
+                if (course != null) {
+                    studyCourses.add(course.getName());
                 }
-
-                writer.println("Study Period " + studyPeriod + ": " + String.join(", ", studyCourses));
-                System.out.println("Study Period " + studyPeriod + ": " + String.join(", ", studyCourses));
-
-                studyPeriod++;
             }
 
-            // Close the PrintWriter
-            writer.close();
+            writer.println("Study Period " + studyPeriod + ": " + String.join(", ", studyCourses));
+            System.out.println("Study Period " + studyPeriod + ": " + String.join(", ", studyCourses));
 
-            System.out.println("\nFile written successfully.");
-
-        } catch (Exception e) {
-            // Handles permission denied or disk full errors
-            System.out.println("An error occurred: " + e.getMessage());
+            studyPeriod++;
         }
+
+        // Close the PrintWriter
+        writer.close();
+
+        System.out.println("\nFile written successfully.");
+
     }
     /*
     Code inspired by:
