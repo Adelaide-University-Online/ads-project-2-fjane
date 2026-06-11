@@ -13,8 +13,8 @@ import java.util.*;
 public class GraphAlgorithms {
 
     /**
-     * Applies topological sort using Kahn's Breadth-First Search algorithm to arrange vertices of a directed acyclic
-     * graph in linear order ensuring vertex ordering of directed edges is not violated.
+     * Applies topological sort using a modified Kahn's Breadth-First Search algorithm to arrange vertices of a
+     * directed acyclic graph in linear order ensuring vertex ordering of directed edges is not violated.
      * @return List of sorted vertices
      * @throws IllegalStateException if a cycle is detected
      */
@@ -23,7 +23,7 @@ public class GraphAlgorithms {
         // Create a new map to hold vertex in-degree information (to prevent mutating graph state)
         Map<Integer, Integer> inDegree = new HashMap<>(graph.getInDegrees());
 
-        // Create a queue and add vertices with 0 in-degree
+        // Create a priority queue and add vertices with 0 in-degree
         Queue<Integer> noIncoming = new PriorityQueue<>();
         for (Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
             if (entry.getValue() == 0) noIncoming.add(entry.getKey());
