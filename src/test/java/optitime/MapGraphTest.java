@@ -35,6 +35,12 @@ class MapGraphTest {
     }
 
     @Test
+    void testNoArgsConstructorDirected() {
+        MapGraph mapNoArgsConstructor = new MapGraph();
+        assertFalse(mapNoArgsConstructor.isDirected());
+    }
+
+    @Test
     void testUndirected() {
         assertFalse(mapUndirectedNotWeighted.isDirected());
     }
@@ -49,6 +55,12 @@ class MapGraphTest {
     @Test
     void testUnweighted() {
         assertFalse(mapUndirectedNotWeighted.isWeighted());
+    }
+
+    @Test
+    void testNoArgsConstructorWeighted() {
+        MapGraph mapNoArgsConstructor = new MapGraph();
+        assertFalse(mapNoArgsConstructor.isWeighted());
     }
 
     // optitime.Vertex tests
