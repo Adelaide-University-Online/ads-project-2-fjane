@@ -149,49 +149,6 @@ public class MapGraph implements Graph{
     }
 
     /**
-     * Creates a new optitime.Edge, adds it to the graph's edges map if it doesn't already exist.
-     * Verifies that the proposed optitime.Edge's endpoints exist in the graph's vertices map first.
-     * @param sourceId an integer id of an optitime.Vertex
-     * @param destinationId an integer id of an optitime.Vertex
-     */
-    public boolean addEdge(int sourceId, int destinationId) {
-        // Checks if source vertex exists in the vertices map
-        if(!isVertex(sourceId)) {
-            throw new IllegalArgumentException("Edge source endpoint does not exist.");
-        }
-
-        // Checks if destination vertex exists in the vertices map
-        if(!isVertex(destinationId)) {
-            throw new IllegalArgumentException("Edge destination endpoint does not exist.");
-        }
-
-        // Check if optitime.Edge already exists in edges map, if so return to avoid duplication
-        if(isEdge(sourceId, destinationId)) {
-            return false;
-        }
-
-        // Adds new optitime.Edge to edges map
-        edges.get(sourceId).add(new Edge(sourceId, destinationId));
-
-        // Increment in and out-degree maps
-        inDegree.put(destinationId, inDegree.get(destinationId) + 1);
-        outDegree.put(sourceId, outDegree.get(sourceId) + 1);
-
-        // Increment edge count
-        numEdges += 1;
-
-        // Adds new optitime.Edge to the adjacency map in the opposite direction for undirected graphs
-        if(!directed) {
-            edges.get(destinationId).add(new Edge(destinationId, sourceId));
-            inDegree.put(sourceId, inDegree.get(sourceId) + 1);
-            outDegree.put(destinationId, outDegree.get(destinationId) + 1);
-            numEdges += 1;
-        }
-
-        return true;
-    }
-
-    /**
      * Creates a new weighted optitime.Edge, adds it to the graph's edges map if it doesn't already exist.
      * Verifies that the proposed optitime.Edge's endpoints exist in the graph's vertices map first.
      * @param sourceId an integer id of an optitime.Vertex
@@ -233,6 +190,16 @@ public class MapGraph implements Graph{
         }
 
         return true;
+    }
+
+    /**
+     * Creates a new optitime.Edge, adds it to the graph's edges map if it doesn't already exist.
+     * Verifies that the proposed optitime.Edge's endpoints exist in the graph's vertices map first.
+     * @param sourceId an integer id of an optitime.Vertex
+     * @param destinationId an integer id of an optitime.Vertex
+     */
+    public boolean addEdge(int sourceId, int destinationId) {
+        return addEdge(sourceId, destinationId, 1.0);
     }
 
     // Other methods
