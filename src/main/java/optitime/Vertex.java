@@ -14,7 +14,7 @@ public class Vertex {
 
     // Attributes
     private final int id;
-    private String name;
+    private final String name;
 
     // Constructor
     public Vertex(int id, String name) {
@@ -32,13 +32,6 @@ public class Vertex {
     /** Returns the name of a vertex. */
     public String getName() {
         return name;
-    }
-
-    // Modifier method
-
-    /** Updates the name of a vertex. */
-    public void setName(String name) {
-        this.name = name;
     }
 
     // Other methods
