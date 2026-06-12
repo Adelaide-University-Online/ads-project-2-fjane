@@ -49,6 +49,9 @@ public interface Graph {
     /** Attempt to add new edge to graph and return boolean indicator of success. */
     boolean addEdge(int sourceId, int destinationId);
 
+    /** Attempt to add new weighted edge to graph and return boolean indicator of success. */
+    boolean addEdge(int sourceId, int destinationId, double weight);
+
     /** Checks if a optitime.Vertex exists in a graph. */
     boolean isVertex(int id);
 
