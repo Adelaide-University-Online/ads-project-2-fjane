@@ -28,11 +28,14 @@ public class Edge {
         this.weight = weight;
     }
 
+    // Overloaded constructor - 2 parameters and unweighted default of 1.0
     public Edge(int sourceId, int destinationId) {
-        this.sourceId = sourceId;
-        this.destinationId = destinationId;
-        this.weight = 1.0;
+        this(sourceId, destinationId, 1.0);
     }
+    /* Constructor chaining code inspired by:
+    T, P. (2024, September 14). Constructor Chaining in Java.
+    https://medium.com/@pratik.941/constructor-chaining-in-java-5c0b86653bd9
+    */
 
     // Accessor methods
 
