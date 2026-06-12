@@ -20,7 +20,7 @@ class MapGraphTest {
 
         mapDirectedWeighted.addVertex(0, "A");
         mapDirectedWeighted.addVertex(1, "B");
-        mapDirectedWeighted.addEdge(0,1);
+        mapDirectedWeighted.addEdge(0,1, 2.3);
 
         mapUndirectedNotWeighted.addVertex(2, "C");
         mapUndirectedNotWeighted.addVertex(3, "D");
@@ -93,6 +93,12 @@ class MapGraphTest {
     @Test
     void testEdgeValidation(){
         assertTrue(mapDirectedWeighted.isEdge(0, 1));
+    }
+
+    @Test
+    void testWeightedEdge() {
+        Edge edge = mapDirectedWeighted.edgeIterator(0).next();
+        assertEquals(2.3, edge.getWeight());
     }
 
     // Undirected graph edge and vertices test
