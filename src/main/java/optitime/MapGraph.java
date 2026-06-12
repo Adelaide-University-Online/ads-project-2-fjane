@@ -40,25 +40,18 @@ public class MapGraph implements Graph{
 
     // Overloaded constructor - 1 parameter and unweighted default
     public MapGraph(boolean directed) {
-        this.directed = directed;
-        this.weighted = false;
-        this.vertices = new HashMap<>();
-        this.edges = new HashMap<>();
-        this.nameToId = new HashMap<>();
-        this.inDegree = new HashMap<>();
-        this.outDegree = new HashMap<>();
+        this(directed, false);
     }
 
     // No argument constructor with undirected and unweighted defaults
     public MapGraph() {
-        this.directed = false;
-        this.weighted = false;
-        this.vertices = new HashMap<>();
-        this.edges = new HashMap<>();
-        this.nameToId = new HashMap<>();
-        this.inDegree = new HashMap<>();
-        this.outDegree = new HashMap<>();
+        this(false, false);
     }
+
+    /* Constructor chaining code inspired by:
+    T, P. (2024, September 14). Constructor Chaining in Java.
+    https://medium.com/@pratik.941/constructor-chaining-in-java-5c0b86653bd9
+    */
 
     // Accessor methods
 
