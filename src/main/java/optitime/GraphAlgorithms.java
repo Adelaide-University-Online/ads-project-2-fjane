@@ -25,8 +25,8 @@ public class GraphAlgorithms {
         // Create a new map to hold vertex in-degree information (to prevent mutating graph state)
         Map<Integer, Integer> inDegree = new HashMap<>(graph.getInDegrees());
 
-        // Create a priority queue and add vertices with 0 in-degree
-        Queue<Integer> noIncoming = new PriorityQueue<>();
+        // Create a max-heap priority queue and add vertices with 0 in-degree
+        PriorityQueue<Integer> noIncoming = new PriorityQueue<>(Collections.reverseOrder());
         for (Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
             if (entry.getValue() == 0) noIncoming.add(entry.getKey());
         }
@@ -94,7 +94,7 @@ public class GraphAlgorithms {
 
                 // Increment path depth, neighbour must come at least one level after current
                 longestPath.put(neighbour,
-                        // Use the greater of existing value or incremented current
+                        // Update neighbour's longest prerequisite chain if a longer path is found via current
                         Math.max(longestPath.get(neighbour), longestPath.get(current) + 1));
             }
         }
@@ -110,7 +110,7 @@ public class GraphAlgorithms {
      * Assigns vertices to bins using greedy first-fit bin packing. Using a combination of topological ordering,
      * ascending longest path chain, and descending out-degreee vertices are placed in the earliest open bin while
      * respecting any dependencies.
-     * @param topoOrder List of vertices sorted using Kahn's algorithm
+     * @param topoOrder List of vertices sorted using Kahn's algorithm - will be resorted by longest path and out-degree
      * @param graph A directed acyclic graph
      * @param longest Map of each vertex (vertexId) to its longest prerequisite chain length
      * @param binSize Number of vertices allowed in each bin
@@ -170,14 +170,14 @@ public class GraphAlgorithms {
             int bin = minBin;
 
             // Start from earliest valid bin and scan forward until a bin with availability is found
-            // getOrDefault - null check protection, returns an empty list if term hasn't been created yet
+            // getOrDefault returns an empty list if term hasn't been created yet
             while (levelMap.getOrDefault(bin, Collections.emptyList()).size() >= binSize) {
                 bin++; // Move to next term if current is at full capacity
             }
 
             // Add vertex to the selected term and term tracker
             assignedTerm.put(course, bin);
-            levelMap.computeIfAbsent(bin, _ -> new ArrayList<>()).add(course);
+            levelMap.computeIfAbsent(bin, k -> new ArrayList<>()).add(course);
         }
 
         return levelMap;
