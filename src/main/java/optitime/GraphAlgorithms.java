@@ -25,8 +25,15 @@ public class GraphAlgorithms {
         // Create a new map to hold vertex in-degree information (to prevent mutating graph state)
         Map<Integer, Integer> inDegree = new HashMap<>(graph.getInDegrees());
 
+        // Create a new map to hold vertex out-degree information (to prevent mutating graph state)
+        Map<Integer, Integer> outDegree = new HashMap<>(graph.getOutDegrees());
+
         // Create a max-heap priority queue and add vertices with 0 in-degree
-        PriorityQueue<Integer> noIncoming = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> noIncoming = new PriorityQueue<>(
+                // Descending order comparison of vertices out-degree
+                (a, b) -> Integer.compare(outDegree.get(b), outDegree.get(a))
+        );
+
         for (Map.Entry<Integer, Integer> entry : inDegree.entrySet()) {
             if (entry.getValue() == 0) noIncoming.add(entry.getKey());
         }
