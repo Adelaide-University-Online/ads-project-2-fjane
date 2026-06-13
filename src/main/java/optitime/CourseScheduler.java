@@ -21,7 +21,7 @@ import java.util.*;
 
 public class CourseScheduler {
 
-    static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException {
         // Scanner 1: user input
         Scanner userInput = new Scanner(System.in);
 
@@ -161,7 +161,7 @@ public class CourseScheduler {
      * Course subjects are scheduled to respect prerequisite order and allow a student to complete the course in as
      * few study periods as possible given the number of subjects they wish to take per study period.
      * @param graph optitime.MapGraph adjacency list representation of course subjects and prerequisites
-     * @param binPack List of ordered course subjects (provided as optitime.Vertex IDs) to be taken per study period
+     * @param binPack List of ordered course subjects (provided as Vertex IDs) to be taken per study period
      * @param courseCode Code of course to be taken
      */
     public static void printPlan(MapGraph graph, Map<Integer, List<Integer>> binPack, String courseCode) throws FileNotFoundException{
@@ -204,7 +204,6 @@ public class CourseScheduler {
         writer.close();
 
         System.out.println("\nFile written successfully.");
-
     }
     /*
     Code inspired by:

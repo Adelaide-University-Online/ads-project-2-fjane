@@ -4,7 +4,8 @@ import java.util.*;
 
 /**
  * File: optitime.MapGraph.java
- * Description: This is a representation of a graph that uses an adjacency-map to represent vertices and edges.
+ * Description: This is a representation of a graph that uses a map implementation of an adjacency list to represent
+ * vertices and edges.
  * Author: Florence Sayavongsa
  * Student ID: 3056629
  * Email ID: florence.sayavongsa@student.adelaide.edu.au
@@ -47,7 +48,6 @@ public class MapGraph implements Graph{
     public MapGraph() {
         this(false, false);
     }
-
     /* Constructor chaining code inspired by:
     T, P. (2024, September 14). Constructor Chaining in Java.
     https://medium.com/@pratik.941/constructor-chaining-in-java-5c0b86653bd9
@@ -98,6 +98,7 @@ public class MapGraph implements Graph{
     /**
      * Returns an optitime.Vertex's ID (or null) by searching the vertices reverse loop map name.
      * @param name optitime.Vertex String name
+     * @return optitime.Vertex's ID
      */
     public int getVertexIdByName(String name) {
         Integer id = nameToId.get(name);
@@ -200,6 +201,7 @@ public class MapGraph implements Graph{
     /**
      * Checks if a vertex already exists in vertices map by looking for duplication in either vertex ID or name.
      * @param vertexId ID of vertex to be validated
+     * @return false is vertex does not exist
      */
     public boolean isVertex(int vertexId) {
         // Check if vertexId exists
@@ -235,10 +237,12 @@ public class MapGraph implements Graph{
         return false;
     }
 
-    /** Returns an iterator to the outgoing Edges of a optitime.Vertex. */
+    /** Returns an iterator to the outgoing Edges of an optitime.Vertex.
+     * @param sourceId the ID of the source optitime.Vertex
+     */
     public Iterator<Edge> edgeIterator(int sourceId) {
         if (!vertices.containsKey(sourceId)) {
-            throw new IllegalArgumentException("Vertex ID " + sourceId + " already exists.");
+            throw new IllegalArgumentException("Vertex ID " + sourceId + " can not be found.");
         }
         return edges.get(sourceId).iterator();
     }

@@ -21,7 +21,10 @@ public class GraphBuilder {
      * Following lines outline a vertex and its dependent separated by a comma.
      * Any line in the text file that contains multiple elements is an indication of an edge where destination vertices
      * are listed to the left of their dependent vertex.
-     * @param scan Scanner to read in text file
+     * @param scan Scanner to read in text file. First line: comma-separated vertex labels; subsequent lines: prerequisite, dependent pairs
+     * @param directed boolean indicator
+     * @param weighted boolean indicator
+     * @return a map implementation of an adjacency list
      */
     public static MapGraph createMapFromFile(Scanner scan, boolean directed, boolean weighted)  {
 
