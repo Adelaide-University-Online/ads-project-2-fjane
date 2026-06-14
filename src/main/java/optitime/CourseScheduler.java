@@ -53,7 +53,7 @@ public class CourseScheduler {
         List<Integer> topo = GraphAlgorithms.kahnsBFS(graph);
 
         // Calculate each course subject's longest path
-        Map<Integer, Integer> longest = GraphAlgorithms.longestPath(graph);
+        Map<Integer, Integer> longest = GraphAlgorithms.longestPath(graph, topo);
 
         // Get number of courses user wants to take concurrently per study period
         int concurrent = concurrentCourses(userInput);
