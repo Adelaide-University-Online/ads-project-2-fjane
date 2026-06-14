@@ -145,12 +145,11 @@ public class CourseScheduler {
     }
     /*
     Exception handling code inspired by:
+    Geeksforgeeks. (2025, July 23). Types of Exception in Java with Examples.
+    https://www.geeksforgeeks.org/java/types-of-exception-in-java-with-examples/
 
     Khayalian, S. (2024, June 17). Mastering Java Exception Handling: A Comprehensive Guide for Developers.
     https://medium.com/@ShantKhayalian/mastering-java-exception-handling-a-comprehensive-guide-for-developers-c31cef921d75
-
-    Geeksforgeeks. (2025, July 23). Types of Exception in Java with Examples.
-    https://www.geeksforgeeks.org/java/types-of-exception-in-java-with-examples/
 
     w3resource. (2025, May 23). Java Program: File reading and empty file exception handling.
     https://www.w3resource.com/java-exercises/exception/java-exception-exercise-5.php
