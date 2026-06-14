@@ -69,8 +69,8 @@ class GraphAlgorithmsTest {
     @Test
     void longestPathValidation() {
         mapDirected.addVertex(5, "F");
-
-        Map<Integer, Integer> longest = GraphAlgorithms.longestPath(mapDirected);
+        List<Integer> topo = GraphAlgorithms.kahnsBFS(mapDirected);
+        Map<Integer, Integer> longest = GraphAlgorithms.longestPath(mapDirected, topo);
 
         assertEquals(0, longest.get(0)); // A
         assertEquals(1, longest.get(1)); // B
@@ -87,7 +87,7 @@ class GraphAlgorithmsTest {
         mapDirected.addVertex(5, "F"); // Disconnected vertex
 
         List<Integer> topo = GraphAlgorithms.kahnsBFS(mapDirected);
-        Map<Integer, Integer> longest = GraphAlgorithms.longestPath(mapDirected);
+        Map<Integer, Integer> longest = GraphAlgorithms.longestPath(mapDirected, topo);
         Map<Integer, List<Integer>> result = GraphAlgorithms.greedyBinPack(topo, mapDirected, longest, 2);
 
         int totalVertices = 0;
