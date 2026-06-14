@@ -82,9 +82,7 @@ public class GraphAlgorithms {
      * @param graph A directed acyclic graph
      * @return A map of each vertex and its longest prerequisite chain length
      */
-    public static Map<Integer, Integer> longestPath( MapGraph graph) {
-        // Get Kahn's BFS result
-        List<Integer> kahnsBFSOrder = kahnsBFS(graph);
+    public static Map<Integer, Integer> longestPath(MapGraph graph, List<Integer> kahnsBFS) {
 
         // Store the longest prerequisite path to get to each vertex. Initialize every vertex with 0 depth.
         Map<Integer, Integer> longestPath = new HashMap<>();
@@ -93,7 +91,7 @@ public class GraphAlgorithms {
         }
 
         // Iterate through all vertices in topological order
-        for (Integer current : kahnsBFSOrder) {
+        for (Integer current : kahnsBFS) {
             // Iterate through current vertex's neighbours
             Iterator<Edge> edgeIterator = graph.edgeIterator(current);
             while (edgeIterator.hasNext()) {
@@ -111,7 +109,10 @@ public class GraphAlgorithms {
     /* Code inspired by:
     Geeks for Geeks. (2025, July 23). Longest Path in a Directed Acyclic Graph.
     https://www.geeksforgeeks.org/dsa/find-longest-path-directed-acyclic-graph/
-    */
+
+    ClaudeAI. (2026, June 6). Preventing concurrent prerequisite enrollment in course scheduler. [Generative AI chat].
+    https://claude.ai/share/9966318d-4ba2-42cf-8b48-15e74b1f35e0
+     */
 
     /**
      * Assigns vertices to bins using greedy first-fit bin packing. Using a combination of topological ordering,
@@ -132,7 +133,7 @@ public class GraphAlgorithms {
         // Get graph's outdegree map
         Map<Integer, Integer> outDegree = new HashMap<>(graph.getOutDegrees());
 
-        // Sort by ascending critical path length first, then by descending out-degree
+        // Sort by ascending prerequisite depth first, then by descending out-degree
         topoOrder.sort(Comparator
                 .comparingInt((Integer c) -> longest.get(c))
                 .thenComparingInt((Integer c) -> -outDegree.get(c))
@@ -146,13 +147,13 @@ public class GraphAlgorithms {
 
         // Loop through sorted vertices
         for (Integer course : topoOrder) {
-            // Minimum bin level
+            // Minimum bin level for the current vertex
             int minBin = 1;
 
-            // Retrieve vertices
+            // Retrieve all vertices to scan outgoing Edges
             Map<Integer, Vertex> vertices = new HashMap<>(graph.getVertices());
 
-            // Find all prerequisites of a vertex and increase minBin for each found
+            // Find all prerequisites of the current vertex and increase minBin by 1 (unweighted) for each found
             for (Map.Entry<Integer, Vertex> vertex : vertices.entrySet()) {
                 Iterator<Edge> it = graph.edgeIterator(vertex.getKey());
 
@@ -166,8 +167,8 @@ public class GraphAlgorithms {
                         Integer prereqBin = assignedTerm.get(vertex.getKey());
 
                         if (prereqBin != null) {
-                            // Assign current vertex to a bin at least one higher than its prerequisite
-                            minBin = Math.max(minBin, prereqBin +1);
+                            // The current course must be assigned to at least one bin after its prerequisite
+                            minBin = Math.max(minBin, prereqBin + 1);
                         }
                     }
                 }
@@ -182,7 +183,7 @@ public class GraphAlgorithms {
                 bin++; // Move to next term if current is at full capacity
             }
 
-            // Add vertex to the selected term and term tracker
+            // Add vertex to the selected bin and bin tracker
             assignedTerm.put(course, bin);
             levelMap.computeIfAbsent(bin, k -> new ArrayList<>()).add(course);
         }
@@ -193,5 +194,4 @@ public class GraphAlgorithms {
     Geeks for Geeks. (2024, December 2). Bin Packing Problem (Minimize number of used Bins).
     https://www.geeksforgeeks.org/dsa/bin-packing-problem-minimize-number-of-used-bins/
     */
-
 }
