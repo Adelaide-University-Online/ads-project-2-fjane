@@ -107,11 +107,11 @@ public class GraphAlgorithms {
         return longestPath;
     }
     /* Code inspired by:
-    Geeks for Geeks. (2025, July 23). Longest Path in a Directed Acyclic Graph.
-    https://www.geeksforgeeks.org/dsa/find-longest-path-directed-acyclic-graph/
-
     ClaudeAI. (2026, June 6). Preventing concurrent prerequisite enrollment in course scheduler. [Generative AI chat].
     https://claude.ai/share/9966318d-4ba2-42cf-8b48-15e74b1f35e0
+
+    Geeks for Geeks. (2025, July 23). Longest Path in a Directed Acyclic Graph.
+    https://www.geeksforgeeks.org/dsa/find-longest-path-directed-acyclic-graph/
      */
 
     /**
@@ -191,7 +191,12 @@ public class GraphAlgorithms {
         return levelMap;
     }
     /* Code inspired by:
+    ClaudeAI. (2026, June 6). Preventing concurrent prerequisite enrollment in course scheduler. [Generative AI chat].
+    https://claude.ai/share/9966318d-4ba2-42cf-8b48-15e74b1f35e0
+
     Geeks for Geeks. (2024, December 2). Bin Packing Problem (Minimize number of used Bins).
     https://www.geeksforgeeks.org/dsa/bin-packing-problem-minimize-number-of-used-bins/
+
+    Grok. (2026, January). First-fit bin packing. https://grokipedia.com/page/First-fit_bin_packing
     */
 }
