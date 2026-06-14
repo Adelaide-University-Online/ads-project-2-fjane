@@ -25,6 +25,10 @@ public class MapGraph implements Graph{
     private boolean directed;
     private boolean weighted;
     private int numEdges;
+    /* Use of vertex reverse look up inspired by:
+    ChatGPT. (2026, June 9). Edge creation from file. [Generative AI chat].
+    https://chatgpt.com/share/6a2ddc0a-889c-83ea-b75a-e13e6e332abe
+    */
 
     // Constructor methods
 
